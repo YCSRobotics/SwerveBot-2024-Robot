@@ -1,7 +1,12 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.CANCoder;
-import com.revrobotics.CANSparkBase;
+//import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.CANcoderConfigurator;
+import com.ctre.phoenix6.hardware.core.CoreCANcoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
@@ -29,10 +34,10 @@ public class SwerveModule {
 
   private RelativeEncoder driveEncoder;
   private RelativeEncoder integratedAngleEncoder;
-  private CANCoder angleEncoder;
+  private CANcoder angleEncoder;
 
-  private final SparkMaxPIDController driveController;
-  private final SparkMaxPIDController angleController;
+  private final SparkPIDController driveController;
+  private final SparkPIDController angleController;
 
   private final SimpleMotorFeedforward feedforward =
       new SimpleMotorFeedforward(
@@ -40,10 +45,11 @@ public class SwerveModule {
 
   public SwerveModule(int moduleNumber, SwerveModuleConstants moduleConstants) {
     this.moduleNumber = moduleNumber;
+    
     angleOffset = moduleConstants.angleOffset;
 
     /* Angle Encoder Config */
-    angleEncoder = new CANCoder(moduleConstants.cancoderID);
+    angleEncoder = new CANcoder(moduleConstants.cancoderID);
     configAngleEncoder();
 
     /* Angle Motor Config */
@@ -71,7 +77,7 @@ public class SwerveModule {
   }
 
   public void resetToAbsolute() {
-    double absolutePosition = getCanCoder().getDegrees() - angleOffset.getDegrees();
+    double absolutePosition = getCanCoder().getRotations() - angleOffset.getRotations();
     integratedAngleEncoder.setPosition(absolutePosition);
   }
 
@@ -139,11 +145,11 @@ public class SwerveModule {
   }
 
   private Rotation2d getAngle() {
-    return Rotation2d.fromDegrees(integratedAngleEncoder.getPosition());
+    return Rotation2d.fromRotations(integratedAngleEncoder.getPosition());
   }
 
   public Rotation2d getCanCoder() {
-    return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition());
+    return Rotation2d.fromRotations(angleEncoder.getAbsolutePosition().getValue());
   }
 
   public SwerveModuleState getState() {
