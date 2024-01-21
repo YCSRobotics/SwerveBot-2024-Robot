@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.revrobotics.CANSparkBase.IdleMode;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -78,7 +79,7 @@ public final class Constants {
     public static final boolean angleInvert = true;
 
     /* Angle Encoder Invert */
-    public static final boolean canCoderInvert = false;
+    public static final SensorDirectionValue cancoderInvert = SensorDirectionValue.CounterClockwise_Positive;
 
     /* Module Specific Constants */
     /* Front Left Module - Module 0 */
@@ -87,7 +88,7 @@ public final class Constants {
       public static final int angleMotorID = 4;
       public static final int canCoderID = 0;
       //public static final Rotation2d angleOffset = Rotation2d.fromDegrees(173.145);
-      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(355.605);
+      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(352.441);
       public static final SwerveModuleConstants constants =
           new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
@@ -109,7 +110,7 @@ public final class Constants {
       public static final int angleMotorID = 6;
       public static final int canCoderID = 2;
       //public static final Rotation2d angleOffset = Rotation2d.fromDegrees(5.098);
-      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(185.625);
+      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(184.922);
       public static final SwerveModuleConstants constants =
           new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
