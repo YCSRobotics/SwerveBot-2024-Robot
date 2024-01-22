@@ -95,7 +95,7 @@ public class Swerve extends SubsystemBase {
     swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
   }
 
-public Rotation2d getHeading(){
+  public Rotation2d getHeading(){
     return getPose().getRotation();
   }
 
@@ -109,7 +109,7 @@ public Rotation2d getHeading(){
 
   public Rotation2d getGyroYaw() {
     return Rotation2d.fromDegrees(gyro.getYaw().getValue());
-}
+  }
 
   public void resetModulesToAbsolute(){
     for(SwerveModule mod :mSwerveMods){
@@ -130,5 +130,7 @@ public Rotation2d getHeading(){
       SmartDashboard.putNumber(
           "Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
     }
+
+    SmartDashboard.putNumber("Gyro get degrees", swerveOdometry.getPoseMeters().getRotation().getDegrees());
   }
 }
