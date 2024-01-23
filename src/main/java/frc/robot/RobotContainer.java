@@ -21,6 +21,9 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
+  private final LauncherSubsystem launcher = new LauncherSubsystem();
+
   /* Controllers */
   private final Joystick driver = new Joystick(0);
 
@@ -34,6 +37,9 @@ public class RobotContainer {
       new JoystickButton(driver, XboxController.Button.kY.value);
   private final JoystickButton robotCentric =
       new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+  // Launcher buttons
+  private final JoystickButton launchButton =
+      new JoystickButton(driver, XboxController.Button.kA.value);
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -48,7 +54,9 @@ public class RobotContainer {
             () -> -driver.getRawAxis(rotationAxis),
             () -> robotCentric.getAsBoolean()));
 
-    // Configure the button bindings
+      launcher.setDefaultCommand(new SetLauncherSpeedCmd(launcher, 0));
+
+
     configureButtonBindings();
   }
 
@@ -62,6 +70,10 @@ public class RobotContainer {
     /* Driver Buttons */
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+    // Launcher Buttons
+    // launchButton.onTrue(getAutonomousCommand());
+    launchButton.onTrue(new InstantCommand(() -> launcher.setLauncherMotorSpeed(0.5, 0.5)));
+
   }
 
   /**
@@ -70,7 +82,10 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+
+    return new SetLauncherSpeedCmd(launcher, 0.5);
+
     // An ExampleCommand will run in autonomous
-    return new exampleAuto(s_Swerve);
+    // return new exampleAuto(s_Swerve);
   }
 }
