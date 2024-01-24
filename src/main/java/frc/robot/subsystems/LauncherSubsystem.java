@@ -17,7 +17,7 @@ public class LauncherSubsystem extends SubsystemBase{
     }
 
     public void setLauncherTargetSpeed (double launcherTargetSpeed){
-        m_leftLauncherMotor.set(launcherTargetSpeed);
+        m_leftLauncherMotor.set(-launcherTargetSpeed);
         m_rightLauncherMotor.set(launcherTargetSpeed);
     }
 }

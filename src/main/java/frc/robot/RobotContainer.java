@@ -70,7 +70,7 @@ public class RobotContainer {
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
     
-    launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
+    launchButton.whileTrue(new LauncherCmd(launcherSubsystem, 0.5));
   }
 
   /**
