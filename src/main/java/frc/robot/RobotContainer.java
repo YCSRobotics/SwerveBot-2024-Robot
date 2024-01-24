@@ -21,9 +21,6 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
-  private final LauncherSubsystem launcher = new LauncherSubsystem();
-
   /* Controllers */
   private final Joystick driver = new Joystick(0);
 
@@ -37,12 +34,12 @@ public class RobotContainer {
       new JoystickButton(driver, XboxController.Button.kY.value);
   private final JoystickButton robotCentric =
       new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-  // Launcher buttons
-  private final JoystickButton launchButton =
-      new JoystickButton(driver, XboxController.Button.kA.value);
+  
+  JoystickButton launchButton = new JoystickButton(driver, 1);
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
+  private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,10 +51,12 @@ public class RobotContainer {
             () -> -driver.getRawAxis(rotationAxis),
             () -> robotCentric.getAsBoolean()));
 
-      launcher.setDefaultCommand(new SetLauncherSpeedCmd(launcher, 0));
-
-
+    // Configure the button bindings
     configureButtonBindings();
+  }
+
+  public LauncherSubsystem getLauncherSubsystem() {
+    return launcherSubsystem;
   }
 
   /**
@@ -70,10 +69,8 @@ public class RobotContainer {
     /* Driver Buttons */
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-    // Launcher Buttons
-    // launchButton.onTrue(getAutonomousCommand());
-    launchButton.onTrue(new InstantCommand(() -> launcher.setLauncherMotorSpeed(0.5, 0.5)));
-
+    
+    launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
   }
 
   /**
@@ -82,10 +79,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-
-    return new SetLauncherSpeedCmd(launcher, 0.5);
-
     // An ExampleCommand will run in autonomous
-    // return new exampleAuto(s_Swerve);
+    return new exampleAuto(s_Swerve);
   }
 }
