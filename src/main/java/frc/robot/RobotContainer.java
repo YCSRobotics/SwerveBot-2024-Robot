@@ -21,8 +21,10 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
   /* Controllers */
   private final Joystick driver = new Joystick(0);
+
 
   /* Drive Controls */
   private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -40,6 +42,12 @@ public class RobotContainer {
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
+
+  // private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
+
+   public AutonomousLauncherCmd getAutonomousLauncherCmd() {
+    return new AutonomousLauncherCmd (launcherSubsystem, 0.6, 5.0);
+   } 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -70,7 +78,7 @@ public class RobotContainer {
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
     
-    launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
+    launchButton.whileTrue(new LauncherCmd(launcherSubsystem, 0.5));
   }
 
   /**
@@ -78,8 +86,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousLauncherCommand() {
     // An ExampleCommand will run in autonomous
-    return new exampleAuto(s_Swerve);
+    // return new exampleAuto(s_Swerve);
+    return new AutonomousLauncherCmd(launcherSubsystem, 0.5, 5);
   }
 }
