@@ -86,8 +86,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousLauncherCommand() {
     // An ExampleCommand will run in autonomous
-    return new exampleAuto(s_Swerve);
+    // return new exampleAuto(s_Swerve);
+    return new AutonomousLauncherCmd(launcherSubsystem, 0.5, 5);
   }
 }
