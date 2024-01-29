@@ -43,6 +43,8 @@ public class RobotContainer {
   private final Swerve s_Swerve = new Swerve();
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
 
+  private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
+
   // private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
 
    public AutonomousLauncherCmd getAutonomousLauncherCmd() {
@@ -86,9 +88,10 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousLauncherCommand() {
+  public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     // return new exampleAuto(s_Swerve);
-    return new AutonomousLauncherCmd(launcherSubsystem, 0.5, 5);
+    // return new AutonomousLauncherCmd(launcherSubsystem, 0.5, 5);
+    return exampleAuto;
   }
 }
