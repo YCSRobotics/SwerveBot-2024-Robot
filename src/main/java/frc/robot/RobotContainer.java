@@ -7,6 +7,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -44,6 +49,9 @@ public class RobotContainer {
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
 
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
+  private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
+
+  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   // private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
 
@@ -63,6 +71,25 @@ public class RobotContainer {
 
     // Configure the button bindings
     configureButtonBindings();
+
+    // Configure autonomous commands
+    configureAutonomousCommands();
+  }
+
+  private void configureAutonomousCommands() {
+    autoChooser.setDefaultOption("Swerve + Launcher Auto", exampleAuto);
+    autoChooser.addOption("Launcher Auto", autonomousLauncherCmd);
+    SmartDashboard.putData("Autonomous Chooser", autoChooser);
+
+    // Create a Shuffleboard layout for the auto buttons
+    ShuffleboardLayout autoLayout = Shuffleboard.getTab("Autonomous").getLayout("Auto Modes", BuiltInLayouts.kList);
+
+    // Add buttons to the Shuffleboard layout for each autonomous option
+    autoLayout.add("Swerve + launcher Auto", exampleAuto);
+    autoLayout.add("Launcher Auto", autonomousLauncherCmd);
+
+    // IMPORTANT: Update the following line to update the layout on Shuffleboard
+    Shuffleboard.update();
   }
 
   public LauncherSubsystem getLauncherSubsystem() {
@@ -92,6 +119,7 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     // return new exampleAuto(s_Swerve);
     // return new AutonomousLauncherCmd(launcherSubsystem, 0.5, 5);
-    return exampleAuto;
+    // return exampleAuto;
+    return autoChooser.getSelected();
   }
 }
