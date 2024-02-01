@@ -10,8 +10,7 @@ public class LauncherSubsystem extends SubsystemBase{
 
     public LauncherSubsystem(){
         m_leftLauncherMotor = new CANSparkMax(9, MotorType.kBrushed);
-        m_rightLauncherMotor= new CANSparkMax(10, MotorType.kBrushed);
-
+        m_rightLauncherMotor = new CANSparkMax(10, MotorType.kBrushed);
         m_leftLauncherMotor.setSmartCurrentLimit(30);
         m_rightLauncherMotor.setSmartCurrentLimit(30);
     }

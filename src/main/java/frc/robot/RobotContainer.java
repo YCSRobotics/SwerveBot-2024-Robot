@@ -29,6 +29,7 @@ public class RobotContainer {
 
   /* Controllers */
   private final Joystick driver = new Joystick(0);
+  private final Joystick operator = new Joystick(1);
 
 
   /* Drive Controls */
@@ -41,8 +42,16 @@ public class RobotContainer {
       new JoystickButton(driver, XboxController.Button.kY.value);
   private final JoystickButton robotCentric =
       new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
+  /* Operator Buttons */
+
+
+
+
   
+  // Need to assign a different buttonNumber to "operator"
   JoystickButton launchButton = new JoystickButton(driver, 1);
+  JoystickButton loaderButton = new JoystickButton(operator, 2);
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -50,7 +59,10 @@ public class RobotContainer {
 
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
+  private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
+  private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
 
+  
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   // private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
@@ -107,6 +119,7 @@ public class RobotContainer {
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
     
+    loaderButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem));
     launchButton.whileTrue(new LauncherCmd(launcherSubsystem, 0.5));
   }
 
