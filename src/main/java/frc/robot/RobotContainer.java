@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.revrobotics.ColorSensorV3;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -19,6 +21,9 @@ import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
+import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.I2C;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -27,10 +32,12 @@ import frc.robot.subsystems.*;
  */
 public class RobotContainer {
 
+  /* RoboRIO */
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+
   /* Controllers */
   private final Joystick driver = new Joystick(0);
   private final Joystick operator = new Joystick(1);
-
 
   /* Drive Controls */
   private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -44,15 +51,11 @@ public class RobotContainer {
       new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
   /* Operator Buttons */
-
-
-
-
+  private final JoystickButton grabberConveyorButton =
+      new JoystickButton(operator, XboxController.Button.kA.value);
+  private final JoystickButton conveyorLauncherButton =
+      new JoystickButton(operator, XboxController.Button.kB.value);
   
-  // Need to assign a different buttonNumber to "operator"
-  JoystickButton launchButton = new JoystickButton(driver, 1);
-  JoystickButton loaderButton = new JoystickButton(operator, 2);
-
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
@@ -61,8 +64,8 @@ public class RobotContainer {
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
+  private final ColorSensorV3 proximitySensor = new ColorSensorV3(i2cPort);
 
-  
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   // private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
@@ -118,9 +121,26 @@ public class RobotContainer {
     /* Driver Buttons */
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-    
-    loaderButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem));
-    launchButton.whileTrue(new LauncherCmd(launcherSubsystem, 0.5));
+
+    grabberConveyorButton.whileTrue(() -> {
+      if (isGrabberConveyorButtonPressed() && !isFieldElementInPosition()) {
+        grabberSubsystem.setGrabberTargetSpeed(0.5);
+        conveyorSubsystem.setConveyorTargetSpeed(0.5);
+      }
+    }).whileFalse(() -> stopAllMotors());
+  }
+
+  private boolean isGrabberConveyorButtonPressed() {
+    return operator.getRawButton(1);
+  }
+
+  private boolean isFieldElementInPosition() {
+    return proximitySensor.getProximity() > (1500);
+  }
+
+  private void stopAllMotors() {
+    grabberSubsystem.setGrabberTargetSpeed(0);
+    conveyorSubsystem.setConveyorTargetSpeed(0);
   }
 
   /**

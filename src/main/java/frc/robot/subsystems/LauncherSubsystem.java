@@ -15,8 +15,8 @@ public class LauncherSubsystem extends SubsystemBase{
         m_rightLauncherMotor.setSmartCurrentLimit(30);
     }
 
-    public void setLauncherTargetSpeed (double launcherTargetSpeed){
-        m_leftLauncherMotor.set(-launcherTargetSpeed);
-        m_rightLauncherMotor.set(launcherTargetSpeed);
+    public void setLauncherTargetSpeed (double Speed){
+        m_leftLauncherMotor.set(-Speed);
+        m_rightLauncherMotor.set(Speed);
     }
 }
