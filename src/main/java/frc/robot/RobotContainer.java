@@ -48,6 +48,8 @@ public class RobotContainer {
       new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
   /* Operator Buttons */
+  private final JoystickButton launchButton =
+      new JoystickButton(operator, XboxController.Button.kY.value);
   private final JoystickButton grabberConveyorButton =
       new JoystickButton(operator, XboxController.Button.kA.value);
   private final JoystickButton conveyorLauncherButton =
@@ -122,21 +124,9 @@ public class RobotContainer {
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-    grabberConveyorButton.whileTrue(() -> {
-      if (isGrabberConveyorButtonPressed() && !isFieldElementInPosition()) {
-        grabberSubsystem.setGrabberTargetSpeed(0.5);
-        conveyorSubsystem.setConveyorTargetSpeed(0.5);
-      }
-    }).whileFalse(() -> stopAllMotors());
-  }
+    launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
 
-  private boolean isGrabberConveyorButtonPressed() {
-    return operator.getRawButton(1);
-  }
-
-  private void stopAllMotors() {
-    grabberSubsystem.setGrabberTargetSpeed(0);
-    conveyorSubsystem.setConveyorTargetSpeed(0);
+    grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
   }
 
   /**

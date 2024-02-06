@@ -1,32 +1,29 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.StadiaController.Button;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
-import frc.robot.subsystems.ConveyorSubsystem;
-import edu.wpi.first.wpilibj.XboxController;
 import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class GrabberConveyorCmd extends Command {
   private final GrabberSubsystem grabberSubsystem;
   private final ConveyorSubsystem conveyorSubsystem;
-  private final XboxController controller;
+  private Joystick operator = new Joystick(1);
 
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  public final ColorSensorV3 proximitySensor = new ColorSensorV3(i2cPort);
 
   private static final double grabberTargetSpeed = 0.5;
   private static final double conveyorTargetSpeed = 0.5;
 
 
   /** Creates a new GrabberConveyorCmd. */
-  public GrabberConveyorCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem) {
+  public GrabberConveyorCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, Joystick operator) {
     this.grabberSubsystem = grabberSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.controller = controller;
+    this.operator = operator;
       
     addRequirements(grabberSubsystem, conveyorSubsystem);
   }
@@ -38,7 +35,7 @@ public class GrabberConveyorCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (controller.getRawButtonPressed(1) && !isFieldElementInPosition()) {
+    if (operator.getRawButtonPressed(1) && !isFieldElementInPosition()) {
       grabberSubsystem.setGrabberTargetSpeed(grabberTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(conveyorTargetSpeed);
 
@@ -48,9 +45,10 @@ public class GrabberConveyorCmd extends Command {
     }
   }
 
-  private boolean isFieldElementInPosition() {
-    return proximitySensor.getP > 100;
+  public boolean isFieldElementInPosition() {
+    return proximitySensor.getProximity() > (1500);
   }
+
 
   // Called once the command ends or is interrupted.
   @Override
