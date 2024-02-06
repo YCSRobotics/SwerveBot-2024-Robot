@@ -21,7 +21,7 @@ import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-import com.revrobotics.ColorSensorV3;
+// import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 
 /**
@@ -31,9 +31,6 @@ import edu.wpi.first.wpilibj.I2C;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-
-  /* RoboRIO */
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
 
   /* Controllers */
   private final Joystick driver = new Joystick(0);
@@ -55,6 +52,10 @@ public class RobotContainer {
       new JoystickButton(operator, XboxController.Button.kA.value);
   private final JoystickButton conveyorLauncherButton =
       new JoystickButton(operator, XboxController.Button.kB.value);
+
+  /* Color Sensor */
+  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  public final ColorSensorV3 proximitySensor = new ColorSensorV3(i2cPort);
   
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -64,7 +65,6 @@ public class RobotContainer {
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
-  private final ColorSensorV3 proximitySensor = new ColorSensorV3(i2cPort);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -132,10 +132,6 @@ public class RobotContainer {
 
   private boolean isGrabberConveyorButtonPressed() {
     return operator.getRawButton(1);
-  }
-
-  private boolean isFieldElementInPosition() {
-    return proximitySensor.getProximity() > (1500);
   }
 
   private void stopAllMotors() {
