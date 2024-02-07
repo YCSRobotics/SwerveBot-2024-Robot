@@ -2,10 +2,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.Joystick;
+
 
 public class GrabberConveyorCmd extends Command {
   private final GrabberSubsystem grabberSubsystem;
@@ -36,8 +38,8 @@ public class GrabberConveyorCmd extends Command {
   @Override
   public void execute() {
     if (operator.getRawButtonPressed(1) && !isFieldElementInPosition()) {
-      grabberSubsystem.setGrabberTargetSpeed(grabberTargetSpeed);
-      conveyorSubsystem.setConveyorTargetSpeed(conveyorTargetSpeed);
+      grabberSubsystem.setGrabberTargetSpeed(Constants.Mechanisms.grabberTargetSpeed);
+      conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
 
     } else {
       grabberSubsystem.setGrabberTargetSpeed(0);

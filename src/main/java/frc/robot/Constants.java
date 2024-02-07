@@ -127,6 +127,24 @@ public final class Constants {
     }
   }
 
+  public static final class Mechanisms {
+    public static final int leftLauncherMotorID = 9;
+    public static final int rightLauncherMotorID = 10;
+
+    public static final int grabberMotorID = 11;
+    public static final int conveyorMotorID = 12;
+
+    public static final int leftLiftMotorID = 13;
+    public static final int rightLiftMotorID = 14;
+
+    public static final int leftArmMotorID = 15;
+    public static final int rightArmMotorID = 16;
+
+    public static final double launcherTargetSpeed = 0.5;
+    public static final double grabberTargetSpeed = 0.5;
+    public static final double conveyorTargetSpeed = 0.5;
+  }
+
   public static final class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;

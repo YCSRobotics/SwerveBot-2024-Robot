@@ -1,10 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
-
-import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -21,7 +15,7 @@ import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-// import com.revrobotics.ColorSensorV3;
+import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C;
 
 /**
@@ -62,15 +56,15 @@ public class RobotContainer {
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
+  private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
+  private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
 
+  /* Commands */
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
-  private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
-  private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
+  private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-
-  // private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
 
    public AutonomousLauncherCmd getAutonomousLauncherCmd() {
     return new AutonomousLauncherCmd (launcherSubsystem, 0.6, 5.0);
