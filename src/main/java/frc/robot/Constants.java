@@ -143,6 +143,11 @@ public final class Constants {
     public static final double launcherTargetSpeed = 0.5;
     public static final double grabberTargetSpeed = 0.5;
     public static final double conveyorTargetSpeed = 0.5;
+
+    // Need to add arm current limits later
+    public static final int launcherCurrentLimit = 30;
+    public static final int grabberCurrentLimit = 30;
+    public static final int conveyorCurrentLimit = 30;
   }
 
   public static final class AutoConstants {
