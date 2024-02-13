@@ -15,9 +15,6 @@ import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-import com.revrobotics.ColorSensorV3;
-import edu.wpi.first.wpilibj.I2C;
-
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -49,10 +46,6 @@ public class RobotContainer {
   private final JoystickButton conveyorLauncherButton =
       new JoystickButton(operator, XboxController.Button.kB.value);
 
-  /* Color Sensor */
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
-  public final ColorSensorV3 proximitySensor = new ColorSensorV3(i2cPort);
-  
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
@@ -63,7 +56,7 @@ public class RobotContainer {
   /* Commands */
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
-  private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, 0.5);
+  private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherTargetSpeed);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -121,7 +114,9 @@ public class RobotContainer {
 
     launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
 
-    grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
+
+    //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
+    grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
   }
 
