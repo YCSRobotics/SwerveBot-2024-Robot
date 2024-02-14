@@ -140,7 +140,7 @@ public final class Constants {
     public static final int leftArmMotorID = 15;
     public static final int rightArmMotorID = 16;
 
-    public static final double launcherTargetSpeed = 0.5;
+    public static final double launcherTargetSpeed = 0.75;
     public static final double grabberTargetSpeed = 0.5;
     public static final double conveyorTargetSpeed = 0.5;
 

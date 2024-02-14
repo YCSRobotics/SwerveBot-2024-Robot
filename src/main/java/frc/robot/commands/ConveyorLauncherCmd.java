@@ -30,13 +30,13 @@ public class ConveyorLauncherCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (operator.getRawButtonPressed(2) && isFieldElementInPosition()) {
+    if (operator.getRawButtonPressed(2)) {
       launcherSubsystem.setLauncherTargetSpeed(Constants.Mechanisms.launcherTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
 
-    } else {
-      launcherSubsystem.setLauncherTargetSpeed(0);
-      conveyorSubsystem.setConveyorTargetSpeed(0);
+    // } else {
+    //   launcherSubsystem.setLauncherTargetSpeed(0);
+    //   conveyorSubsystem.setConveyorTargetSpeed(0);
     }
   }
 

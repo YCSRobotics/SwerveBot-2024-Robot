@@ -115,8 +115,8 @@ public class RobotContainer {
     launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
 
 
-    //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
-    grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
+    grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
+    //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
   }
 

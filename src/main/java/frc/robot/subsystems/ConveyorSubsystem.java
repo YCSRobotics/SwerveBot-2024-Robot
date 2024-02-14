@@ -9,7 +9,7 @@ public class ConveyorSubsystem extends SubsystemBase{
     public CANSparkMax m_ConveyorMotor;
 
     public ConveyorSubsystem(){
-        m_ConveyorMotor = new CANSparkMax(Constants.Mechanisms.conveyorMotorID, MotorType.kBrushed);
+        m_ConveyorMotor = new CANSparkMax(Constants.Mechanisms.conveyorMotorID, MotorType.kBrushless);
         m_ConveyorMotor.setSmartCurrentLimit(Constants.Mechanisms.conveyorCurrentLimit);
     }
 

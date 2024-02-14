@@ -9,7 +9,7 @@ public class GrabberSubsystem extends SubsystemBase{
     public CANSparkMax m_GrabberMotor;
 
     public GrabberSubsystem(){
-        m_GrabberMotor = new CANSparkMax(Constants.Mechanisms.grabberMotorID, MotorType.kBrushed);
+        m_GrabberMotor = new CANSparkMax(Constants.Mechanisms.grabberMotorID, MotorType.kBrushless);
         m_GrabberMotor.setSmartCurrentLimit(Constants.Mechanisms.grabberCurrentLimit);
     }
 
