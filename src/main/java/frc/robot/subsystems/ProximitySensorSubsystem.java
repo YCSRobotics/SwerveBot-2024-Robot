@@ -24,3 +24,4 @@ public class ProximitySensorSubsystem extends SubsystemBase {
     return proximitySensor.getProximity() > (1500);
   }
 }
+  

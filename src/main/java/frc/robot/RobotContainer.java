@@ -25,6 +25,7 @@ public class RobotContainer {
 
   /* Controllers */
   private final Joystick driver = new Joystick(0);
+  private final XboxController operator1 = new XboxController(2);
   private final Joystick operator = new Joystick(1);
 
   /* Drive Controls */
@@ -45,6 +46,8 @@ public class RobotContainer {
       new JoystickButton(operator, XboxController.Button.kA.value);
   private final JoystickButton conveyorLauncherButton =
       new JoystickButton(operator, XboxController.Button.kB.value);
+  /*private final XboxController conveyorLauncherButton1 =
+      new XboxController(operator1, XboxController.Button.kB.value);*/
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -132,4 +135,5 @@ public class RobotContainer {
     // return exampleAuto;
     return autoChooser.getSelected();
   }
+  
 }

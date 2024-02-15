@@ -26,21 +26,22 @@ public class GrabberConveyorCmd extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-       //if (operator.getRawButtonPressed(1) && !isFieldElementInPosition()) {
-   if (operator.getRawButtonPressed(1) && !proximitySensorSubsystem.isFieldElementInPosition()) { 
-      // if (operator.getRawButtonPressed(1)) {
+   //if (operator.getRawButton(1) && !proximitySensorSubsystem.isFieldElementInPosition()) { 
+   //while (!proximitySensorSubsystem.isFieldElementInPosition()) { 
       SmartDashboard.putNumber("Proximity Sensor Cmd", proximitySensorSubsystem.proximitySensor.getProximity());
       SmartDashboard.putBoolean("ElementInPosition Cmd", proximitySensorSubsystem.isFieldElementInPosition());
+      SmartDashboard.putBoolean("isFinished", isFinished());
       
     
       grabberSubsystem.setGrabberTargetSpeed(Constants.Mechanisms.grabberTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
-   }
+   //}
 
      //} else {
      //  grabberSubsystem.setGrabberTargetSpeed(0);
@@ -56,10 +57,12 @@ public class GrabberConveyorCmd extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
+    // if (operator.getRawButtonReleased(1) || proximitySensorSubsystem.isFieldElementInPosition()) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
 
-  
-  
-  
+    return operator.getRawButtonReleased(1) || proximitySensorSubsystem.isFieldElementInPosition();
+  }
 }
