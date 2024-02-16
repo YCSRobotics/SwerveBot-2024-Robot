@@ -8,12 +8,12 @@ import frc.robot.Constants;
 public class ConveyorSubsystem extends SubsystemBase{
     public CANSparkMax m_ConveyorMotor;
 
-    public ConveyorSubsystem(){
+    public ConveyorSubsystem() {
         m_ConveyorMotor = new CANSparkMax(Constants.Mechanisms.conveyorMotorID, MotorType.kBrushless);
         m_ConveyorMotor.setSmartCurrentLimit(Constants.Mechanisms.conveyorCurrentLimit);
     }
 
-    public void setConveyorTargetSpeed (double Speed){
+    public void setConveyorTargetSpeed (double Speed) {
         m_ConveyorMotor.set(-Speed);
     }
 }

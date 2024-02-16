@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -25,7 +24,6 @@ public class RobotContainer {
 
   /* Controllers */
   private final Joystick driver = new Joystick(0);
-  private final XboxController operator1 = new XboxController(2);
   private final Joystick operator = new Joystick(1);
 
   /* Drive Controls */
@@ -46,8 +44,8 @@ public class RobotContainer {
       new JoystickButton(operator, XboxController.Button.kA.value);
   private final JoystickButton conveyorLauncherButton =
       new JoystickButton(operator, XboxController.Button.kB.value);
-  /*private final XboxController conveyorLauncherButton1 =
-      new XboxController(operator1, XboxController.Button.kB.value);*/
+  private final JoystickButton hangerButton =
+      new JoystickButton(operator, XboxController.Button.kX.value);
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -55,6 +53,7 @@ public class RobotContainer {
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
   private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
+  private final HangerSubsystem hangerSubsystem = new HangerSubsystem();
 
   /* Commands */
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
@@ -121,6 +120,7 @@ public class RobotContainer {
     grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
     //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
+    hangerButton.whileTrue(new HangerCmd(hangerSubsystem));
   }
 
   /**
@@ -135,5 +135,4 @@ public class RobotContainer {
     // return exampleAuto;
     return autoChooser.getSelected();
   }
-  
 }

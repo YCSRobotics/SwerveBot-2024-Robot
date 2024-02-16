@@ -8,12 +8,12 @@ import frc.robot.Constants;
 public class GrabberSubsystem extends SubsystemBase{
     public CANSparkMax m_GrabberMotor;
 
-    public GrabberSubsystem(){
+    public GrabberSubsystem() {
         m_GrabberMotor = new CANSparkMax(Constants.Mechanisms.grabberMotorID, MotorType.kBrushless);
         m_GrabberMotor.setSmartCurrentLimit(Constants.Mechanisms.grabberCurrentLimit);
     }
 
-    public void setGrabberTargetSpeed (double Speed){
+    public void setGrabberTargetSpeed (double Speed) {
         m_GrabberMotor.set(Speed);
     }
 }

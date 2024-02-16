@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.revrobotics.CANSparkBase.IdleMode;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -128,6 +129,8 @@ public final class Constants {
   }
 
   public static final class Mechanisms {
+
+    /*CAN IDs*/
     public static final int leftLauncherMotorID = 9;
     public static final int rightLauncherMotorID = 10;
 
@@ -140,14 +143,23 @@ public final class Constants {
     public static final int leftArmMotorID = 15;
     public static final int rightArmMotorID = 16;
 
+    /*Target Speeds*/
     public static final double launcherTargetSpeed = 1.0;
     public static final double grabberTargetSpeed = 0.6;
     public static final double conveyorTargetSpeed = 1.0;
+    public static final double hangerTargetSpeed = 0.5;
 
-    // Need to add arm current limits later
+    /*Current Limits*/
     public static final int launcherCurrentLimit = 30;
     public static final int grabberCurrentLimit = 30;
     public static final int conveyorCurrentLimit = 30;
+    public static final int hangerCurrentLimit = 30;
+
+    /*Hanger PID Controllers*/
+    public static final double hangerPIDControllerkP = 0.05;
+    public static final double hangerPIDControllerkI = 0.0;
+    public static final double hangerPIDControllerkD = 0.0;
+
   }
 
   public static final class AutoConstants {
