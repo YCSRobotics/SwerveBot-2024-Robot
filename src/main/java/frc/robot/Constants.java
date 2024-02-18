@@ -137,8 +137,8 @@ public final class Constants {
     public static final int grabberMotorID = 11;
     public static final int conveyorMotorID = 12;
 
-    public static final int leftLiftMotorID = 13;
-    public static final int rightLiftMotorID = 14;
+    public static final int leftHangerMotorID = 13;
+    public static final int rightHangerMotorID = 14;
 
     public static final int leftArmMotorID = 15;
     public static final int rightArmMotorID = 16;
@@ -147,7 +147,9 @@ public final class Constants {
     public static final double launcherTargetSpeed = 1.0;
     public static final double grabberTargetSpeed = 0.6;
     public static final double conveyorTargetSpeed = 1.0;
-    public static final double hangerTargetSpeed = 0.5;
+
+    /*Hanger Target Position*/
+    public static final double hangerTargetPosition = 12.0;
 
     /*Current Limits*/
     public static final int launcherCurrentLimit = 30;

@@ -120,7 +120,7 @@ public class RobotContainer {
     grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
     //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
-    hangerButton.whileTrue(new HangerCmd(hangerSubsystem));
+    hangerButton.onTrue(new HangerCmd(hangerSubsystem, operator));
   }
 
   /**

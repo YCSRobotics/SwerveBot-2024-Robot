@@ -8,10 +8,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class HangerCmd extends Command {
   private final HangerSubsystem hangerSubsystem;
+  private Joystick operator;
   
 
-  public HangerCmd(HangerSubsystem hangerSubsystem) {
+  public HangerCmd(HangerSubsystem hangerSubsystem, Joystick operator) {
     this.hangerSubsystem = hangerSubsystem;
+    this.operator = operator;
 
     addRequirements(hangerSubsystem);
   }
@@ -19,13 +21,13 @@ public class HangerCmd extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    hangerSubsystem.setHangerPositionTarget(Constants.Mechanisms.hangerTargetSpeed);
+    hangerSubsystem.setHangerPositionTarget(Constants.Mechanisms.hangerTargetPosition);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    hangerSubsystem.setHangerPositionTarget(Constants.Mechanisms.hangerTargetPosition);
   }
 
   // Called once the command ends or is interrupted.

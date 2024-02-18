@@ -38,7 +38,6 @@ public class GrabberConveyorCmd extends Command {
       SmartDashboard.putBoolean("ElementInPosition Cmd", proximitySensorSubsystem.isFieldElementInPosition());
       SmartDashboard.putBoolean("isFinished", isFinished());
       
-    
       grabberSubsystem.setGrabberTargetSpeed(Constants.Mechanisms.grabberTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
    //}
