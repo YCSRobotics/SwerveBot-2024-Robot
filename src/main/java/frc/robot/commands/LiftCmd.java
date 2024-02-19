@@ -6,12 +6,12 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class HangerCmd extends Command {
+public class LiftCmd extends Command {
   private final HangerSubsystem hangerSubsystem;
   private Joystick operator;
   
 
-  public HangerCmd(HangerSubsystem hangerSubsystem, Joystick operator) {
+  public LiftCmd(HangerSubsystem hangerSubsystem, Joystick operator) {
     this.hangerSubsystem = hangerSubsystem;
     this.operator = operator;
 

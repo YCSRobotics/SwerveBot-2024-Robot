@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -56,14 +57,13 @@ public class RobotContainer {
   private final HangerSubsystem hangerSubsystem = new HangerSubsystem();
 
   /* Commands */
-  private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem);
-  private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, strafeAxis, rotationAxis);
+  private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
+  private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
   private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherTargetSpeed);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-
    public AutonomousLauncherCmd getAutonomousLauncherCmd() {
-    return new AutonomousLauncherCmd (launcherSubsystem, 0.6, 5.0);
+    return new AutonomousLauncherCmd (launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
    } 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -103,6 +103,10 @@ public class RobotContainer {
     return launcherSubsystem;
   }
 
+  public ConveyorSubsystem getConveyorSubsystem() {
+    return conveyorSubsystem;
+  }
+
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -120,7 +124,7 @@ public class RobotContainer {
     grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
     //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
-    hangerButton.onTrue(new HangerCmd(hangerSubsystem, operator));
+    hangerButton.onTrue(new LiftCmd(hangerSubsystem, operator));
   }
 
   /**

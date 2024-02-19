@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkBase.ControlType;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
@@ -46,15 +47,13 @@ public class HangerSubsystem extends SubsystemBase {
     public void setHangerPositionTarget(double targetPosition) {
         m_leftHangerMotor.getPIDController().setReference(targetPosition, ControlType.kPosition);
         m_rightHangerMotor.getPIDController().setReference(targetPosition, ControlType.kPosition);
-
-        if (m_leftEncoder.getPosition() > Constants.Mechanisms.hangerTargetPosition -1.0) {
-            if (gyro.getRoll().getValueAsDouble() > 0.50) {
-                m_leftHangerMotor.getPIDController().setReference(targetPosition - gyro.getRoll().getValueAsDouble() * 0.68, ControlType.kPosition);
-            }
-        }
     }
 
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("Left Motor Current", m_leftHangerMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Right Motor Current", m_rightHangerMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Left Lift Encoder", m_leftEncoder.getPosition());
+        SmartDashboard.putNumber("Right Lift Encoder", m_rightEncoder.getPosition());
     }
 }
