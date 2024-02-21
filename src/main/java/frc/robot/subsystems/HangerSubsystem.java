@@ -16,44 +16,28 @@ import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 public class HangerSubsystem extends SubsystemBase {
-    public CANSparkMax m_leftHangerMotor;
-    public CANSparkMax m_rightHangerMotor;
-    private final SparkPIDController m_leftHangerPIDController;
-    private final SparkPIDController m_rightHangerPIDController;
-    private final RelativeEncoder m_leftEncoder;
-    private final RelativeEncoder m_rightEncoder;
-    private final Pigeon2 gyro;
+    public CANSparkMax m_hangerMotor;
+    private final SparkPIDController m_hangerPIDController;
+    private final RelativeEncoder m_encoder;
 
-    public HangerSubsystem() {
-        gyro = new Pigeon2(Constants.Swerve.pigeonID);
-        System.out.println("Start controller config");
-        m_leftHangerMotor = new CANSparkMax(Constants.Mechanisms.leftHangerMotorID, MotorType.kBrushless);
-        m_rightHangerMotor = new CANSparkMax(Constants.Mechanisms.rightHangerMotorID, MotorType.kBrushless);
-        m_leftHangerMotor.setSmartCurrentLimit(Constants.Mechanisms.hangerCurrentLimit);
-        m_rightHangerMotor.setSmartCurrentLimit(Constants.Mechanisms.hangerCurrentLimit);
-        m_leftEncoder = m_leftHangerMotor.getEncoder();
-        m_rightEncoder = m_rightHangerMotor.getEncoder();
+    public HangerSubsystem(int HangerMotorID, double targetVelocity) {
+        m_hangerMotor = new CANSparkMax(HangerMotorID, MotorType.kBrushless);
+        m_hangerMotor.setSmartCurrentLimit(Constants.Mechanisms.hangerCurrentLimit);
+        m_encoder = m_hangerMotor.getEncoder();
         
-        m_leftHangerPIDController = m_leftHangerMotor.getPIDController();
-        m_rightHangerPIDController = m_rightHangerMotor.getPIDController();
-        m_leftHangerPIDController.setP(Constants.Mechanisms.hangerPIDControllerkP);
-        m_leftHangerPIDController.setI(Constants.Mechanisms.hangerPIDControllerkI);
-        m_leftHangerPIDController.setD(Constants.Mechanisms.hangerPIDControllerkD);
-        m_rightHangerPIDController.setP(Constants.Mechanisms.hangerPIDControllerkP);
-        m_rightHangerPIDController.setI(Constants.Mechanisms.hangerPIDControllerkI);
-        m_rightHangerPIDController.setD(Constants.Mechanisms.hangerPIDControllerkD);
+        m_hangerPIDController = m_hangerMotor.getPIDController();
+        m_hangerPIDController.setP(Constants.Mechanisms.hangerPIDControllerkP);
+        m_hangerPIDController.setI(Constants.Mechanisms.hangerPIDControllerkI);
+        m_hangerPIDController.setD(Constants.Mechanisms.hangerPIDControllerkD);
     }
 
-    public void setHangerPositionTarget(double targetPosition) {
-        m_leftHangerMotor.getPIDController().setReference(targetPosition, ControlType.kPosition);
-        m_rightHangerMotor.getPIDController().setReference(targetPosition, ControlType.kPosition);
+    public void setHangerVelocityTarget(double targetVelocity) {
+        m_hangerMotor.getPIDController().setReference(targetVelocity, ControlType.kVelocity);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Left Motor Current", m_leftHangerMotor.getOutputCurrent());
-        SmartDashboard.putNumber("Right Motor Current", m_rightHangerMotor.getOutputCurrent());
-        SmartDashboard.putNumber("Left Lift Encoder", m_leftEncoder.getPosition());
-        SmartDashboard.putNumber("Right Lift Encoder", m_rightEncoder.getPosition());
+        SmartDashboard.putNumber("Lift Current", m_hangerMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Lift Velocity", m_encoder.getVelocity());
     }
 }

@@ -149,7 +149,7 @@ public final class Constants {
     public static final double conveyorTargetSpeed = 1.0;
 
     /*Hanger Target Position*/
-    public static final double hangerTargetPosition = 25.0;
+    public static final double hangerTargetPosition = 50.0; // Originally 25.0
 
     /*Current Limits*/
     public static final int launcherCurrentLimit = 30;
@@ -159,7 +159,7 @@ public final class Constants {
 
     /*Hanger PID Controllers*/
     public static final double hangerPIDControllerkP = 0.04; // Originally 0.05
-    public static final double hangerPIDControllerkI = 0.00002; // Originally 0.0
+    public static final double hangerPIDControllerkI = 0.0; // Originally 0.00002
     public static final double hangerPIDControllerkD = 0.0;
   }
 

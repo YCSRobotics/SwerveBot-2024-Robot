@@ -89,11 +89,11 @@ public class RobotContainer {
     SmartDashboard.putData("Autonomous Chooser", autoChooser);
 
     // Create a Shuffleboard layout for the auto buttons
-    ShuffleboardLayout autoLayout = Shuffleboard.getTab("Autonomous").getLayout("Auto Modes", BuiltInLayouts.kList);
+    // ShuffleboardLayout autoLayout = Shuffleboard.getTab("Autonomous").getLayout("Auto Modes", BuiltInLayouts.kList);
 
     // Add buttons to the Shuffleboard layout for each autonomous option
-    autoLayout.add("Swerve + launcher Auto", exampleAuto);
-    autoLayout.add("Launcher Auto", autonomousLauncherCmd);
+    // autoLayout.add("Swerve + launcher Auto", exampleAuto);
+    // autoLayout.add("Launcher Auto", autonomousLauncherCmd);
 
     // IMPORTANT: Update the following line to update the layout on Shuffleboard
     Shuffleboard.update();

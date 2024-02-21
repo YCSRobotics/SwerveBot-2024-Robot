@@ -12,7 +12,7 @@ public class AutonomousLauncherCmd extends Command {
   private final ConveyorSubsystem conveyorSubsystem;
   private final double conveyorTargetSpeed;
   private final double durationSeconds;
-  private double startTime;
+  public static double startTime;
 
   /** Creates a new AutonomousCmd. */
   public AutonomousLauncherCmd(LauncherSubsystem launcherSubsystem, double launcherTargetSpeed, ConveyorSubsystem conveyorSubsystem, double conveyorTargetSpeed, double durationSeconds) {
