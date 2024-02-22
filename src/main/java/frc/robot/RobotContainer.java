@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
@@ -27,6 +28,14 @@ public class RobotContainer {
   private final Joystick driver = new Joystick(0);
   private final Joystick operator = new Joystick(1);
 
+  XboxController xboxController = new XboxController(2);
+
+  int axisNumber = 2;
+  JoystickButton operatorButton = new JoystickButton(operator, axisNumber);
+  final int leftTriggerAxis = 2;
+  double triggerThreshold = 0.7;
+
+
   /* Drive Controls */
   private final int translationAxis = XboxController.Axis.kLeftY.value;
   private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -47,6 +56,21 @@ public class RobotContainer {
       new JoystickButton(operator, XboxController.Button.kB.value);
   private final JoystickButton hangerButton =
       new JoystickButton(operator, XboxController.Button.kX.value);
+
+  private final JoystickButton leftHangerUpButton =
+      new JoystickButton(operator, XboxController.Button.kLeftBumper);
+  private final JoystickButton rightHangerUpButton =
+      new JoystickButton(operator, XboxController.Button.kRightBumper);
+
+  // XboxController xboxTrigger = new Button(() -> xboxController.getLeftTriggerAxis() > triggerThreshold);
+  // boolean xboxTrigger = Math.abs(operator.get()) > 0.1;
+
+  double leftHangerDown = xboxController.getLeftTriggerAxis();
+  double rightHangerDown = xboxController.getRightTriggerAxis();
+
+  leftHanger = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
+
+
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -125,7 +149,11 @@ public class RobotContainer {
     //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
     hangerButton.onTrue(new LiftCmd(hangerSubsystem, operator));
-  }
+
+    new Trigger(() -> xboxController.getLeftTriggerAxis() > triggerThreshold)
+        .whenActive(new LiftCmd(leftHangerDown, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch, 
+                                null, () -> xboxController.getRightTriggerAxis() <= triggerThreshold));
+    }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.lib.config.SwerveModuleConstants;
 
 public final class Constants {
@@ -157,10 +158,16 @@ public final class Constants {
     public static final int conveyorCurrentLimit = 30;
     public static final int hangerCurrentLimit = 80; // Originally 30
 
-    /*Hanger PID Controllers*/
+    /*Hanger*/
     public static final double hangerPIDControllerkP = 0.04; // Originally 0.05
     public static final double hangerPIDControllerkI = 0.0; // Originally 0.00002
     public static final double hangerPIDControllerkD = 0.0;
+
+    public static DigitalInput leftLimitSwitch = new DigitalInput(0);
+    public static DigitalInput rightLimitSwitch = new DigitalInput(1);
+
+    public static final double upVelocity = 3000;
+    public static final double downVelocity = 1500;
   }
 
   public static final class AutoConstants {
