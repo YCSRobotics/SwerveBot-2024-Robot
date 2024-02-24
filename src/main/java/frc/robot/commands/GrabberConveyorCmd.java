@@ -12,13 +12,11 @@ public class GrabberConveyorCmd extends Command {
   private final GrabberSubsystem grabberSubsystem;
   private final ConveyorSubsystem conveyorSubsystem;
   private final ProximitySensorSubsystem proximitySensorSubsystem;
-  private Joystick operator;
 
   /** Creates a new GrabberConveyorCmd. */
-  public GrabberConveyorCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, Joystick operator, ProximitySensorSubsystem proximitySensorSubsystem) {
+  public GrabberConveyorCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
     this.grabberSubsystem = grabberSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.operator = operator;
     this.proximitySensorSubsystem = proximitySensorSubsystem;
       
     addRequirements(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
@@ -62,6 +60,6 @@ public class GrabberConveyorCmd extends Command {
     //   return false;
     // }
 
-    return operator.getRawButtonReleased(1) || proximitySensorSubsystem.isFieldElementInPosition();
+    return proximitySensorSubsystem.isFieldElementInPosition();
   }
 }

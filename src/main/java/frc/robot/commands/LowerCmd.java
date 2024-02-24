@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class LiftCmd extends Command {
+public class LowerCmd extends Command {
   private final HangerSubsystem hangerSubsystem;
   private final DigitalInput limitSwitch;
   private final double targetVelocity;
 
-  public LiftCmd(HangerSubsystem hangerSubsystem, double targetVelocity, DigitalInput limitSwitch) {
+  public LowerCmd(HangerSubsystem hangerSubsystem, double targetVelocity, DigitalInput limitSwitch) {
     this.hangerSubsystem = hangerSubsystem;
     this.limitSwitch = limitSwitch;
     this.targetVelocity = targetVelocity;
@@ -45,6 +45,6 @@ public class LiftCmd extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !limitSwitch.get();
+    return false;
   }
 }

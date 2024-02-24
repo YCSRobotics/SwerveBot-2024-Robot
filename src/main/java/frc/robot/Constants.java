@@ -156,10 +156,10 @@ public final class Constants {
     public static final int launcherCurrentLimit = 30;
     public static final int grabberCurrentLimit = 30;
     public static final int conveyorCurrentLimit = 30;
-    public static final int hangerCurrentLimit = 80; // Originally 30
+    public static final int hangerCurrentLimit = 40; // Originally 30
 
     /*Hanger*/
-    public static final double hangerPIDControllerkP = 0.04; // Originally 0.05
+    public static final double hangerPIDControllerkP = 0.0001; // Originally 0.05
     public static final double hangerPIDControllerkI = 0.0; // Originally 0.00002
     public static final double hangerPIDControllerkD = 0.0;
 
@@ -167,7 +167,7 @@ public final class Constants {
     public static DigitalInput rightLimitSwitch = new DigitalInput(1);
 
     public static final double upVelocity = 3000;
-    public static final double downVelocity = 1500;
+    public static final double downVelocity = -3000;
   }
 
   public static final class AutoConstants {

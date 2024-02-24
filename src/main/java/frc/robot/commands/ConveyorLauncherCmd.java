@@ -10,14 +10,12 @@ import frc.robot.subsystems.ProximitySensorSubsystem;
 public class ConveyorLauncherCmd extends Command {
   private final ConveyorSubsystem conveyorSubsystem;
   private final LauncherSubsystem launcherSubsystem;
-  private Joystick operator;
   private ProximitySensorSubsystem proximitySensorSubsystem;
 
   /** Creates a new ConveyorLauncherCmd. */
-  public ConveyorLauncherCmd(LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem, Joystick operator, ProximitySensorSubsystem proximitySensorSubsystem) {
+  public ConveyorLauncherCmd(LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
     this.launcherSubsystem = launcherSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.operator = operator;
     this.proximitySensorSubsystem = proximitySensorSubsystem;
 
     addRequirements(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem);
@@ -30,14 +28,12 @@ public class ConveyorLauncherCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (operator.getRawButtonPressed(2)) {
       launcherSubsystem.setLauncherTargetSpeed(Constants.Mechanisms.launcherTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
 
     // } else {
     //   launcherSubsystem.setLauncherTargetSpeed(0);
     //   conveyorSubsystem.setConveyorTargetSpeed(0);
-    }
   }
 
   // Called once the command ends or is interrupted.

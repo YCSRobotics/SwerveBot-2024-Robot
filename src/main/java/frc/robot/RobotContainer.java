@@ -11,7 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -23,54 +28,13 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private final CommandXboxController m_driver = new CommandXboxController(0);
+  private final CommandXboxController m_operator = new CommandXboxController(1);
 
-  /* Controllers */
-  private final Joystick driver = new Joystick(0);
-  private final Joystick operator = new Joystick(1);
-
-  XboxController xboxController = new XboxController(2);
-
-  int axisNumber = 2;
-  JoystickButton operatorButton = new JoystickButton(operator, axisNumber);
-  final int leftTriggerAxis = 2;
   double triggerThreshold = 0.7;
-
-
-  /* Drive Controls */
-  private final int translationAxis = XboxController.Axis.kLeftY.value;
-  private final int strafeAxis = XboxController.Axis.kLeftX.value;
-  private final int rotationAxis = XboxController.Axis.kRightX.value;
-
-  /* Driver Buttons */
-  private final JoystickButton zeroGyro =
-      new JoystickButton(driver, XboxController.Button.kY.value);
-  private final JoystickButton robotCentric =
-      new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-
-  /* Operator Buttons */
-  private final JoystickButton launchButton =
-      new JoystickButton(operator, XboxController.Button.kY.value);
-  private final JoystickButton grabberConveyorButton =
-      new JoystickButton(operator, XboxController.Button.kA.value);
-  private final JoystickButton conveyorLauncherButton =
-      new JoystickButton(operator, XboxController.Button.kB.value);
-  private final JoystickButton hangerButton =
-      new JoystickButton(operator, XboxController.Button.kX.value);
-
-  private final JoystickButton leftHangerUpButton =
-      new JoystickButton(operator, XboxController.Button.kLeftBumper);
-  private final JoystickButton rightHangerUpButton =
-      new JoystickButton(operator, XboxController.Button.kRightBumper);
 
   // XboxController xboxTrigger = new Button(() -> xboxController.getLeftTriggerAxis() > triggerThreshold);
   // boolean xboxTrigger = Math.abs(operator.get()) > 0.1;
-
-  double leftHangerDown = xboxController.getLeftTriggerAxis();
-  double rightHangerDown = xboxController.getRightTriggerAxis();
-
-  leftHanger = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
-
-
 
   /* Subsystems */
   private final Swerve s_Swerve = new Swerve();
@@ -78,7 +42,9 @@ public class RobotContainer {
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
   private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
-  private final HangerSubsystem hangerSubsystem = new HangerSubsystem();
+
+  private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
+  private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
 
   /* Commands */
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
@@ -95,10 +61,10 @@ public class RobotContainer {
     s_Swerve.setDefaultCommand(
         new TeleopSwerve(
             s_Swerve,
-            () -> -driver.getRawAxis(translationAxis),
-            () -> -driver.getRawAxis(strafeAxis),
-            () -> -driver.getRawAxis(rotationAxis),
-            () -> robotCentric.getAsBoolean()));
+            () -> -m_driver.getLeftY(),
+            () -> -m_driver.getLeftX(),
+            () -> -m_driver.getRightX(),
+            () -> m_driver.leftBumper().getAsBoolean()));
 
     // Configure the button bindings
     configureButtonBindings();
@@ -140,20 +106,35 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /* Driver Buttons */
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
-    zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+    m_driver.y().onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
 
-    launchButton.onTrue(new LauncherCmd(launcherSubsystem, 0.5));
+    m_operator.y().onTrue(new LauncherCmd(launcherSubsystem, 0.5));
 
 
-    grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
+    m_operator.a().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
-    conveyorLauncherButton.whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, operator, proximitySensorSubsystem));
-    hangerButton.onTrue(new LiftCmd(hangerSubsystem, operator));
+    m_operator.b().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    // hangerButton.onTrue(new LiftCmd(hangerSubsystem, operator));
 
-    new Trigger(() -> xboxController.getLeftTriggerAxis() > triggerThreshold)
-        .whenActive(new LiftCmd(leftHangerDown, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch, 
-                                null, () -> xboxController.getRightTriggerAxis() <= triggerThreshold));
-    }
+    // new Trigger(() -> xboxController.getLeftTriggerAxis() > triggerThreshold)
+    //     .whenActive(new LiftCmd(leftHangerDown, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch, 
+    //                             null, () -> xboxController.getRightTriggerAxis() <= triggerThreshold));
+    // }
+
+    m_operator.leftTrigger(triggerThreshold)
+        .whileTrue(new LowerCmd(leftHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch));
+
+    m_operator.rightTrigger(triggerThreshold)
+        .whileTrue(new LowerCmd(rightHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.rightLimitSwitch));
+
+    // Binding for the left hanger to lift up when the left bumper is pressed
+    m_operator.leftBumper().whileTrue(new LiftCmd(leftHangerSubsystem, Constants.Mechanisms.upVelocity, 
+                                               Constants.Mechanisms.leftLimitSwitch));
+
+    // Binding for the right hanger to lift up when the right bumper is pressed
+    m_operator.rightBumper().whileTrue(new LiftCmd(rightHangerSubsystem, Constants.Mechanisms.upVelocity, 
+                                                Constants.Mechanisms.rightLimitSwitch));
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

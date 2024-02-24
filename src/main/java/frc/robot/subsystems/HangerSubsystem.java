@@ -12,6 +12,8 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
+
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 
@@ -46,7 +48,7 @@ public class HangerSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Lift Current", m_hangerMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Lift Current" + m_hangerMotor.getDeviceId(), m_hangerMotor.getOutputCurrent());
         // SmartDashboard.putNumber("Lift Velocity", m_encoder.getVelocity());
     }
 

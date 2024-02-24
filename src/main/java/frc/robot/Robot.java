@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.config.CTREConfigs;
 import frc.robot.commands.AutonomousLauncherCmd;
+import frc.robot.subsystems.HangerSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
