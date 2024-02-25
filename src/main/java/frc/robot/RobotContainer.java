@@ -107,11 +107,16 @@ public class RobotContainer {
     /* Driver Buttons */
     //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
     m_driver.y().onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+    
+    // Modified 02/25/24 12:00pm
+    m_driver.a().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.leftBumper().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.rightBumper().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 
     m_operator.y().onTrue(new LauncherCmd(launcherSubsystem, 0.5));
 
-
     m_operator.a().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+
     //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
     m_operator.b().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     // hangerButton.onTrue(new LiftCmd(hangerSubsystem, operator));
