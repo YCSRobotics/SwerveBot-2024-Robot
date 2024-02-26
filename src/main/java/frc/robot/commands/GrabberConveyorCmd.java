@@ -5,7 +5,6 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
 import frc.robot.subsystems.ProximitySensorSubsystem;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GrabberConveyorCmd extends Command {

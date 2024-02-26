@@ -2,22 +2,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.HangerSubsystem;
-import frc.robot.Constants;
-
-import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LowerCmd extends Command {
   private final HangerSubsystem hangerSubsystem;
-  private final DigitalInput limitSwitch;
   private final double targetVelocity;
 
   public LowerCmd(HangerSubsystem hangerSubsystem, double targetVelocity, DigitalInput limitSwitch) {
     this.hangerSubsystem = hangerSubsystem;
-    this.limitSwitch = limitSwitch;
     this.targetVelocity = targetVelocity;
     
     addRequirements(hangerSubsystem);
