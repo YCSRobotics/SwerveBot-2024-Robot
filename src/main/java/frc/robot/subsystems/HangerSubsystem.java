@@ -40,7 +40,7 @@ public class HangerSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Lift Current" + m_hangerMotor.getDeviceId(), m_hangerMotor.getOutputCurrent());
+        //SmartDashboard.putNumber("Lift Current" + m_hangerMotor.getDeviceId(), m_hangerMotor.getOutputCurrent());
         // SmartDashboard.putNumber("Lift Velocity", m_encoder.getVelocity());
     }
 
