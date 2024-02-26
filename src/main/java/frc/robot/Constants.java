@@ -2,11 +2,13 @@ package frc.robot;
 
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.revrobotics.CANSparkBase.IdleMode;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.lib.config.SwerveModuleConstants;
 
 public final class Constants {
@@ -125,6 +127,47 @@ public final class Constants {
       public static final SwerveModuleConstants constants =
           new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
+  }
+
+  public static final class Mechanisms {
+
+    /*CAN IDs*/
+    public static final int leftLauncherMotorID = 9;
+    public static final int rightLauncherMotorID = 10;
+
+    public static final int grabberMotorID = 11;
+    public static final int conveyorMotorID = 12;
+
+    public static final int leftHangerMotorID = 13;
+    public static final int rightHangerMotorID = 14;
+
+    public static final int leftArmMotorID = 15;
+    public static final int rightArmMotorID = 16;
+
+    /*Target Speeds*/
+    public static final double launcherTargetSpeed = 1.0;
+    public static final double grabberTargetSpeed = 0.6;
+    public static final double conveyorTargetSpeed = 1.0;
+
+    /*Hanger Target Position*/
+    public static final double hangerTargetPosition = 50.0; // Originally 25.0
+
+    /*Current Limits*/
+    public static final int launcherCurrentLimit = 30;
+    public static final int grabberCurrentLimit = 30;
+    public static final int conveyorCurrentLimit = 30;
+    public static final int hangerCurrentLimit = 40; // Originally 30
+
+    /*Hanger*/
+    public static final double hangerPIDControllerkP = 0.0001; // Originally 0.05
+    public static final double hangerPIDControllerkI = 0.0; // Originally 0.00002
+    public static final double hangerPIDControllerkD = 0.0;
+
+    public static DigitalInput leftLimitSwitch = new DigitalInput(0);
+    public static DigitalInput rightLimitSwitch = new DigitalInput(1);
+
+    public static final double upVelocity = 3000;
+    public static final double downVelocity = -3000;
   }
 
   public static final class AutoConstants {
