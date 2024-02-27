@@ -28,7 +28,7 @@ public class AutonomousLauncherCmd extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    launcherSubsystem.setLauncherTargetSpeed(launcherTargetSpeed);
+    launcherSubsystem.setLauncherVelocityTarget(launcherTargetSpeed);
     conveyorSubsystem.setConveyorTargetSpeed(conveyorTargetSpeed);
     startTime = Timer.getFPGATimestamp();
   }
@@ -36,13 +36,13 @@ public class AutonomousLauncherCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // launcherSubsystem.setLauncherTargetSpeed(launcherTargetSpeed);
+    // launcherSubsystem.setLauncherVelocityTarget(launcherTargetSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherSubsystem.setLauncherTargetSpeed(0.0);
+    launcherSubsystem.setLauncherVelocityTarget(0.0);
     conveyorSubsystem.setConveyorTargetSpeed(0.0);
   }
 

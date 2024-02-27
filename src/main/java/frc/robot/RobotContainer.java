@@ -104,7 +104,7 @@ public class RobotContainer {
     m_driver.leftBumper().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     m_driver.rightBumper().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 
-    m_operator.y().onTrue(new LauncherCmd(launcherSubsystem, 0.5));
+    m_operator.y().onTrue(new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherVelocityTarget));
 
     m_operator.a().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 

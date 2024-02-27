@@ -6,13 +6,13 @@ import frc.robot.Constants;
 
 public class LauncherCmd extends Command {
   private final LauncherSubsystem launcherSubsystem;
-  private final double launcherTargetSpeed;
+  private final double targetVelocity;
   
 
   /** Creates a new SetlauncherSpeedCmd. */
-  public LauncherCmd(LauncherSubsystem launcherSubsystem, double launcherTargetSpeed) {
+  public LauncherCmd(LauncherSubsystem launcherSubsystem, double targetVelocity) {
     this.launcherSubsystem = launcherSubsystem;
-    this.launcherTargetSpeed = launcherTargetSpeed;
+    this.targetVelocity = targetVelocity;
     
     addRequirements(launcherSubsystem);
   }
@@ -20,19 +20,19 @@ public class LauncherCmd extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    launcherSubsystem.setLauncherTargetSpeed(launcherTargetSpeed);
+    launcherSubsystem.setLauncherVelocityTarget(targetVelocity);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcherSubsystem.setLauncherTargetSpeed(Constants.Mechanisms.launcherTargetSpeed);
+    launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.launcherTargetSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherSubsystem.setLauncherTargetSpeed(0);
+    launcherSubsystem.setLauncherVelocityTarget(0);
   }
 
   // Returns true when the command should end.

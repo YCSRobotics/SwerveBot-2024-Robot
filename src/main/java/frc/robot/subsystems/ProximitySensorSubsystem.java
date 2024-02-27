@@ -16,8 +16,8 @@ public class ProximitySensorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Proximity Sensor", proximitySensor.getProximity());
-    SmartDashboard.putBoolean("ElementInPosition", isFieldElementInPosition());
+    //SmartDashboard.putNumber("Proximity Sensor", proximitySensor.getProximity());
+    //SmartDashboard.putBoolean("ElementInPosition", isFieldElementInPosition());
   }
 
   public boolean isFieldElementInPosition() {

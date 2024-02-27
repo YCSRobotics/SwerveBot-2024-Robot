@@ -145,18 +145,18 @@ public final class Constants {
     public static final int rightArmMotorID = 16;
 
     /*Target Speeds*/
-    public static final double launcherTargetSpeed = 1.0;
+    public static final double launcherTargetSpeed = 0.25; // Was 1.0
     public static final double grabberTargetSpeed = 0.6;
     public static final double conveyorTargetSpeed = 1.0;
 
     /*Hanger Target Position*/
-    public static final double hangerTargetPosition = 50.0; // Originally 25.0
+    public static final double hangerTargetPosition = 50.0;
 
     /*Current Limits*/
     public static final int launcherCurrentLimit = 30;
     public static final int grabberCurrentLimit = 30;
     public static final int conveyorCurrentLimit = 30;
-    public static final int hangerCurrentLimit = 40; // Originally 30
+    public static final int hangerCurrentLimit = 40;
 
     /*Hanger*/
     public static final double hangerPIDControllerkP = 0.0001; // Originally 0.05
@@ -168,6 +168,13 @@ public final class Constants {
 
     public static final double upVelocity = 3000;
     public static final double downVelocity = -3000;
+
+    /*Launcher*/
+    public static final double launcherPIDControllerkP = 0.0; 
+    public static final double launcherPIDControllerkI = 0.0; 
+    public static final double launcherPIDControllerkD = 0.0;
+
+    public static final double launcherVelocityTarget = 0;
   }
 
   public static final class AutoConstants {
