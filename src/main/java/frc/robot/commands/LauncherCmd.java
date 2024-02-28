@@ -26,7 +26,7 @@ public class LauncherCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.launcherTargetSpeed);
+    launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.launcherVelocityTarget);
   }
 
   // Called once the command ends or is interrupted.

@@ -56,6 +56,7 @@ public class RobotContainer {
             () -> -m_driver.getLeftX(),
             () -> -m_driver.getRightX(),
             () -> m_driver.leftBumper().getAsBoolean()));
+            // leftBumper Sets Driver Orientation Mode
 
     // Configure the button bindings
     configureButtonBindings();
@@ -96,40 +97,24 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     /* Driver Buttons */
-    //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
-    m_driver.y().onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
+    // DON'T FOREGET!!!! The right leftbumper is used to set the Driver Orientation Mode above in Robot Container
+    m_driver.rightBumper().whileTrue(new GrabberConveyorReverseCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.rightTrigger(triggerThreshold).whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.x().onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
     
-    // Modified 02/25/24 12:00pm
-    m_driver.a().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    m_driver.leftBumper().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    m_driver.rightBumper().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-
-    m_operator.y().onTrue(new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherVelocityTarget));
-
-    m_operator.a().whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-
-    //grabberConveyorButton.whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, operator));
-    m_operator.b().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    // hangerButton.onTrue(new LiftCmd(hangerSubsystem, operator));
-
-    // new Trigger(() -> xboxController.getLeftTriggerAxis() > triggerThreshold)
-    //     .whenActive(new LiftCmd(leftHangerDown, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch, 
-    //                             null, () -> xboxController.getRightTriggerAxis() <= triggerThreshold));
-    // }
-
+    /* Operator Buttons */
+    m_operator.leftBumper().whileTrue(new LiftCmd(leftHangerSubsystem, Constants.Mechanisms.upVelocity, 
+                                                  Constants.Mechanisms.leftLimitSwitch));
+    m_operator.rightBumper().whileTrue(new LiftCmd(rightHangerSubsystem, Constants.Mechanisms.upVelocity, 
+                                                   Constants.Mechanisms.rightLimitSwitch));
     m_operator.leftTrigger(triggerThreshold)
         .whileTrue(new LowerCmd(leftHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch));
-
     m_operator.rightTrigger(triggerThreshold)
         .whileTrue(new LowerCmd(rightHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.rightLimitSwitch));
-
-    // Binding for the left hanger to lift up when the left bumper is pressed
-    m_operator.leftBumper().whileTrue(new LiftCmd(leftHangerSubsystem, Constants.Mechanisms.upVelocity, 
-                                               Constants.Mechanisms.leftLimitSwitch));
-
-    // Binding for the right hanger to lift up when the right bumper is pressed
-    m_operator.rightBumper().whileTrue(new LiftCmd(rightHangerSubsystem, Constants.Mechanisms.upVelocity, 
-                                                Constants.Mechanisms.rightLimitSwitch));
+    m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
   }
 
   /**

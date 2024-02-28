@@ -20,8 +20,8 @@ public final class Constants {
     public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
     /* Drivetrain Constants */
-    public static final double trackWidth = Units.inchesToMeters(28.00);
-    public static final double wheelBase = Units.inchesToMeters(26.875);
+    public static final double trackWidth = Units.inchesToMeters(24.125);
+    public static final double wheelBase = Units.inchesToMeters(24.1875);
     public static final double wheelDiameter = Units.inchesToMeters(4.0);
     public static final double wheelCircumference = wheelDiameter * Math.PI;
 
@@ -144,19 +144,30 @@ public final class Constants {
     public static final int leftArmMotorID = 15;
     public static final int rightArmMotorID = 16;
 
+
     /*Target Speeds*/
-    public static final double launcherTargetSpeed = 0.25; // Was 1.0
+    // public static final double launcherTargetSpeed = 0.25; // Was 1.0
     public static final double grabberTargetSpeed = 0.6;
     public static final double conveyorTargetSpeed = 1.0;
+    public static final double ampVelocityTargetSpeed = 250;
+
+    public static final double launcherVelocityTarget = 5000.0; // 250 for Amp
+
+    // GrabberConveyor - Reverse Target Speeds
+    public static final double reversegrabberTargetSpeed = -0.6;
+    public static final double reverseconveyorTargetSpeed = -1.0;
+
 
     /*Hanger Target Position*/
     public static final double hangerTargetPosition = 50.0;
 
+
     /*Current Limits*/
-    public static final int launcherCurrentLimit = 30;
+    public static final int launcherCurrentLimit = 60;
     public static final int grabberCurrentLimit = 30;
     public static final int conveyorCurrentLimit = 30;
     public static final int hangerCurrentLimit = 40;
+
 
     /*Hanger*/
     public static final double hangerPIDControllerkP = 0.0001; // Originally 0.05
@@ -169,12 +180,11 @@ public final class Constants {
     public static final double upVelocity = 3000;
     public static final double downVelocity = -3000;
 
-    /*Launcher*/
-    public static final double launcherPIDControllerkP = 0.0; 
-    public static final double launcherPIDControllerkI = 0.0; 
-    public static final double launcherPIDControllerkD = 0.0;
 
-    public static final double launcherVelocityTarget = 0;
+    /*Launcher*/
+    public static final double launcherPIDControllerkP = 0.0004;
+    public static final double launcherPIDControllerkI = 0.000001;
+    public static final double launcherPIDControllerkD = 0.0;
   }
 
   public static final class AutoConstants {

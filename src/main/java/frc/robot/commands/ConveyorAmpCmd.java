@@ -6,13 +6,13 @@ import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.ProximitySensorSubsystem;
 
-public class ConveyorLauncherCmd extends Command {
+public class ConveyorAmpCmd extends Command {
   private final ConveyorSubsystem conveyorSubsystem;
   private final LauncherSubsystem launcherSubsystem;
   private ProximitySensorSubsystem proximitySensorSubsystem;
 
   /** Creates a new ConveyorLauncherCmd. */
-  public ConveyorLauncherCmd(LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+  public ConveyorAmpCmd(LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
     this.launcherSubsystem = launcherSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
     this.proximitySensorSubsystem = proximitySensorSubsystem;
@@ -27,7 +27,7 @@ public class ConveyorLauncherCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.launcherVelocityTarget);
+      launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.ampVelocityTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
 
     // } else {
