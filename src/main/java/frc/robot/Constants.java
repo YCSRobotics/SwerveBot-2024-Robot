@@ -185,6 +185,18 @@ public final class Constants {
     public static final double launcherPIDControllerkP = 0.0004;
     public static final double launcherPIDControllerkI = 0.000001;
     public static final double launcherPIDControllerkD = 0.0;
+
+     /*TrapArm*/
+     public static final int flipMotorID = 20; //Needs Number
+     public static final int rotateMotorID = 21; //Needs Number
+    
+     public static final double trapArmPIDControllerkP = 0.0001; // Originally 0.05
+    public static final double trapArmPIDControllerkI = 0.0; // Originally 0.00002
+    public static final double trapArmPIDControllerkD = 0.0;
+    
+    public static final double rotateSpeed = 0.2;
+    public static final double flipToTargetPosition = 5;
+  
   }
 
   public static final class AutoConstants {

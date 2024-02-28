@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.io.Console;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -32,6 +34,7 @@ public class RobotContainer {
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
+  private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
   private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
 
   private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
@@ -115,6 +118,8 @@ public class RobotContainer {
         .whileTrue(new LowerCmd(rightHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.rightLimitSwitch));
     m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+
+    m_operator.b().whileTrue(new TrapCmd (trapArmSubsystem,Constants.Mechanisms.flipToTargetPosition, Constants.Mechanisms.rotateSpeed));
   }
 
   /**
