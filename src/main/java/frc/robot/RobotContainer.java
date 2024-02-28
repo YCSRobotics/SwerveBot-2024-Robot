@@ -119,7 +119,10 @@ public class RobotContainer {
     m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 
-    m_operator.b().whileTrue(new TrapCmd (trapArmSubsystem,Constants.Mechanisms.flipToTargetPosition, Constants.Mechanisms.rotateSpeed));
+    m_operator.a().whileTrue(new TrapGrabCmd (trapArmSubsystem));
+    m_operator.b().whileTrue(new TrapFlipCmd (trapArmSubsystem, flipPosition));
+    m_operator.x().whileTrue(new TrapRotateCmd (trapArmSubsystem, rotateSpeed));
+  
   }
 
   /**
