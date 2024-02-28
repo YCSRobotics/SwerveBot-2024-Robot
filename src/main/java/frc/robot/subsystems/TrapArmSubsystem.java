@@ -24,9 +24,9 @@ public class TrapArmSubsystem extends SubsystemBase {
     rotateMotor = new CANSparkMax(Constants.Mechanisms.rotateMotorID, MotorType.kBrushless);
     flipMotorPIDController = flipMotor.getPIDController();
     
-    flipMotorPIDController.setP(Constants.Mechanisms.trapArmPIDControllerkP);
-    flipMotorPIDController.setI(Constants.Mechanisms.trapArmPIDControllerkI);
-    flipMotorPIDController.setD(Constants.Mechanisms.trapArmPIDControllerkD);
+    //flipMotorPIDController.setP(Constants.Mechanisms.trapArmPIDControllerkP);
+    //flipMotorPIDController.setI(Constants.Mechanisms.trapArmPIDControllerkI);
+    //flipMotorPIDController.setD(Constants.Mechanisms.trapArmPIDControllerkD);
 
   }
 
@@ -38,12 +38,20 @@ public class TrapArmSubsystem extends SubsystemBase {
     pneumaticCylinder.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public void flipToPosition(double position) {
-    flipMotorPIDController.setReference(position, ControlType.kPosition);
+  //public void flipToPosition(double position) {
+    //flipMotorPIDController.setReference(position, ControlType.kPosition);
+  //}
+
+  public void flip (double speed){
+    flipMotor.set(speed);
   }
 
   public void rotate(double speed) {
-    rotateMotor.set(speed);
+    if (Math.abs(rotateMotor.getEncoder().getPosition) < rotateLimit) {
+      rotateMotor.set(speed);
+    } else {
+      rotateMotor.set(0);
+    }
   }
   
 }
