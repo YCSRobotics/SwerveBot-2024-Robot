@@ -1,32 +1,25 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class TrapCmd extends Command {
-  /** Creates a new TrapCmd. */
-  public TrapCmd() {
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import frc.robot.subsystems.TrapArmSubsystem;
+
+public class TrapCmd extends SequentialCommandGroup {
+
+  public TrapCmd(TrapArmSubsystem trapArm, double flipToPosition, double rotateSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addCommands(
+      new InstantCommand(() -> trapArm.grab(), trapArm),
+      new FlipCommand(trapArm, flipToPosition),
+      new StartEndCommand(
+        () -> trapArm.rotate(rotateSpeed),
+        () -> trapArm.rotate(0),
+        trapArm
+      )
+    );
+
   }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+  
 }
