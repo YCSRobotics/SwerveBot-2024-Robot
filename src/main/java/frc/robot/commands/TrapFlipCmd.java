@@ -7,11 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.TrapArmSubsystem;
 
-public class TrapFlipCommand extends Command {
+public class TrapFlipCmd extends Command {
   private final TrapArmSubsystem trapArmSubsystem;
   private final double trapPosition;
 
-  public TrapFlipCommand (TrapArmSubsystem trapArmSubsystem, double trapPosition) {
+  public TrapFlipCmd (TrapArmSubsystem trapArmSubsystem, double trapPosition) {
     this.trapArmSubsystem = trapArmSubsystem;
     this.trapPosition = trapPosition;
   }
@@ -19,7 +19,7 @@ public class TrapFlipCommand extends Command {
  
   @Override
   public void initialize() {
-    trapArmSubsystem.flipToPosition(trapPosition);
+    trapArmSubsystem.flip(trapPosition);
   }
 
   
