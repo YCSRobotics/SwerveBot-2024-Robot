@@ -141,8 +141,8 @@ public final class Constants {
     public static final int leftHangerMotorID = 13;
     public static final int rightHangerMotorID = 14;
 
-    public static final int leftArmMotorID = 15;
-    public static final int rightArmMotorID = 16;
+    public static final int flipMotorID = 16;
+    public static final int rotateMotorID = 15; 
 
 
     /*Target Speeds*/
@@ -187,16 +187,17 @@ public final class Constants {
     public static final double launcherPIDControllerkD = 0.0;
 
      /*TrapArm*/
-     public static final int flipMotorID = 20; //Needs Number
-     public static final int rotateMotorID = 21; //Needs Number
-    
-     public static final double trapArmPIDControllerkP = 0.0001; // Originally 0.05
+    public static final double trapArmPIDControllerkP = 0.0001; // Originally 0.05
     public static final double trapArmPIDControllerkI = 0.0; // Originally 0.00002
     public static final double trapArmPIDControllerkD = 0.0;
     
-    public static final double rotateSpeed = 0.2;
-    public static final double flipToTargetPosition = 5;
-  
+    public static final double rotateSpeed = 0.0005;//??
+    public static final double rotateLimit = 2;//??
+    public static final double flipSpeed = 0.0005;//??
+    public static final double flipLimit = 2;//??
+
+    public static final int solenoidPort = 50;//??
+   
   }
 
   public static final class AutoConstants {

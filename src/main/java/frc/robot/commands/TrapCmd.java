@@ -14,7 +14,7 @@ public class TrapCmd extends SequentialCommandGroup {
     // Use addRequirements() here to declare subsystem dependencies.
     addCommands(
       new InstantCommand(() -> trapArm.grab(), trapArm),
-      new TrapFlipCommand(trapArm, flipPosition),
+      new TrapFlipCmd(trapArm, flipPosition),
       new StartEndCommand(
         () -> trapArm.rotate(rotateSpeed),
         () -> trapArm.rotate(0),

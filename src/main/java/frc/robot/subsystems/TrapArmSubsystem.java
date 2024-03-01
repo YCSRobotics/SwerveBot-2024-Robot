@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class TrapArmSubsystem extends SubsystemBase {
   //private final DoubleSolenoid pneumaticCylinder;
-  private Solenoid pneumaticCylinder;
+  private Solenoid trapArmSolenoid;
   private final CANSparkMax flipMotor;
   private final CANSparkMax rotateMotor;
-  private final SparkPIDController flipMotorPIDController;
+  //private final SparkPIDController flipMotorPIDController;
 
   
   public TrapArmSubsystem() {
@@ -25,7 +25,8 @@ public class TrapArmSubsystem extends SubsystemBase {
      
     flipMotor = new CANSparkMax(Constants.Mechanisms.flipMotorID, MotorType.kBrushless);
     rotateMotor = new CANSparkMax(Constants.Mechanisms.rotateMotorID, MotorType.kBrushless);
-    flipMotorPIDController = flipMotor.getPIDController();
+    trapArmSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Mechanisms.solenoidPort);
+    //flipMotorPIDController = flipMotor.getPIDController();
     
     //flipMotorPIDController.setP(Constants.Mechanisms.trapArmPIDControllerkP);
     //flipMotorPIDController.setI(Constants.Mechanisms.trapArmPIDControllerkI);
@@ -40,39 +41,32 @@ public class TrapArmSubsystem extends SubsystemBase {
   // public void release() {
   //   pneumaticCylinder.set(DoubleSolenoid.Value.kReverse);
   // }
-  
-    public SolenoidSubsystem(int solenoidPort) {
-        solenoid = new Solenoid(solenoidPort);
-    }
+
 
   //public void flipToPosition(double position) {
     //flipMotorPIDController.setReference(position, ControlType.kPosition);
   //}
-
-  public void flip (double speed){
-    flipMotor.set(speed);
+  public void grab(){
+    trapArmSolenoid.set (true);
   }
-
-  public void rotate(double speed) {
-    if ((Math.abs(rotateMotor.getEncoder().getPosition())) < Constants.Mechanisms.rotatelimit) {
+  
+  public void release(){
+    trapArmSolenoid.set (false);
+  }
+  public void flip (double speed){
+    if ((Math.abs(flipMotor.getEncoder().getPosition())) < Constants.Mechanisms.flipLimit) {
       rotateMotor.set(speed);
     } else {
       rotateMotor.set(0);
     }
   }
 
-  
-
-public class SolenoidSubsystem {
-  
-
-    
-
-    public void grab() {
-        solenoid.set(true); // Activates the solenoid for grabbing
+  public void rotate(double speed) {
+    if ((Math.abs(rotateMotor.getEncoder().getPosition())) < Constants.Mechanisms.flipLimit) {
+      rotateMotor.set(speed);
+    } else {
+      rotateMotor.set(0);
     }
+  }
 
-    public void release() {
-        solenoid.set(false); // Deactivates the solenoid for releasing
-    }
 }

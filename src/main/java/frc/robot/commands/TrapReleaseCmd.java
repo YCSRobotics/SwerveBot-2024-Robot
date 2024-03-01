@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.TrapArmSubsystem;
 
-public class TrapGrabCmd extends InstantCommand {
-  public TrapGrabCmd (TrapArmSubsystem trapArmSubsystem) {
-    super(trapArmSubsystem::grab, trapArmSubsystem);
+public class TrapReleaseCmd extends InstantCommand {
+  public TrapReleaseCmd (TrapArmSubsystem trapArmSubsystem) {
+    super(trapArmSubsystem::release, trapArmSubsystem);
   }
 
  
