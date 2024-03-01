@@ -91,7 +91,7 @@ public class SwerveModule {
 
   private void configAngleMotor() {
     angleMotor.restoreFactoryDefaults();
-    CANSparkMaxUtil.setCANSparkMaxBusUsage(angleMotor, Usage.kPositionOnly);
+    CANSparkMaxUtil.setCANSparkMaxBusUsage(angleMotor, Usage.kAll);
     angleMotor.setSmartCurrentLimit(Constants.Swerve.angleContinuousCurrentLimit);
     angleMotor.setInverted(Constants.Swerve.angleInvert);
     angleMotor.setIdleMode(Constants.Swerve.angleNeutralMode);
