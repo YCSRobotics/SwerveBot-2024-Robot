@@ -4,21 +4,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
-import frc.robot.subsystems.ProximitySensorSubsystem;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GrabberConveyorCmd extends Command {
   private final GrabberSubsystem grabberSubsystem;
   private final ConveyorSubsystem conveyorSubsystem;
-  private final ProximitySensorSubsystem proximitySensorSubsystem;
 
   /** Creates a new GrabberConveyorCmd. */
-  public GrabberConveyorCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+  public GrabberConveyorCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem) {
     this.grabberSubsystem = grabberSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.proximitySensorSubsystem = proximitySensorSubsystem;
       
-    addRequirements(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+    addRequirements(grabberSubsystem, conveyorSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -59,6 +56,6 @@ public class GrabberConveyorCmd extends Command {
     //   return false;
     // }
 
-    return proximitySensorSubsystem.isFieldElementInPosition();
+    return false;
   }
 }
