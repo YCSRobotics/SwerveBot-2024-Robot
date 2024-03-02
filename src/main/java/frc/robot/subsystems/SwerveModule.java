@@ -90,7 +90,7 @@ public class SwerveModule {
   //}
 
   private void configAngleMotor() {
-    angleMotor.restoreFactoryDefaults();
+    //angleMotor.restoreFactoryDefaults();
     CANSparkMaxUtil.setCANSparkMaxBusUsage(angleMotor, Usage.kAll);
     angleMotor.setSmartCurrentLimit(Constants.Swerve.angleContinuousCurrentLimit);
     angleMotor.setInverted(Constants.Swerve.angleInvert);
@@ -101,12 +101,13 @@ public class SwerveModule {
     angleController.setD(Constants.Swerve.angleKD);
     angleController.setFF(Constants.Swerve.angleKFF);
     angleMotor.enableVoltageCompensation(Constants.Swerve.voltageComp);
+    angleMotor.setCANTimeout(0);
     angleMotor.burnFlash();
     resetToAbsolute();
   }
 
   private void configDriveMotor() {
-    driveMotor.restoreFactoryDefaults();
+    //driveMotor.restoreFactoryDefaults();
     CANSparkMaxUtil.setCANSparkMaxBusUsage(driveMotor, Usage.kAll);
     driveMotor.setSmartCurrentLimit(Constants.Swerve.driveContinuousCurrentLimit);
     driveMotor.setInverted(Constants.Swerve.driveInvert);

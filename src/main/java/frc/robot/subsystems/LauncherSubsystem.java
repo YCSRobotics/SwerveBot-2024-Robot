@@ -37,7 +37,6 @@ public class LauncherSubsystem extends SubsystemBase{
     public void setLauncherVelocityTarget(double targetVelocity) {
         m_leftlauncherPIDController.setReference(-targetVelocity, ControlType.kVelocity);
         m_rightLauncherPIDController.setReference(targetVelocity, ControlType.kVelocity);
-        System.out.println("Launcher System");
     }
 
     @Override
