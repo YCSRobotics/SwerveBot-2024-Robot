@@ -1,22 +1,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.TrapArmSubsystem;
 
-public class TrapRotateCmd extends Command {
+public class TrapRotateLeftCmd extends Command {
   private final TrapArmSubsystem trapArmSubsystem;
-  private final double speed;
 
-  public TrapRotateCmd (TrapArmSubsystem trapArmSubsystem, double speed) {
+  public TrapRotateLeftCmd (TrapArmSubsystem trapArmSubsystem) {
     this.trapArmSubsystem = trapArmSubsystem;
-    this.speed = speed;
     addRequirements(trapArmSubsystem);
   }
 
  
   @Override
   public void initialize() {
-    trapArmSubsystem.rotate(speed);
+    trapArmSubsystem.rotate(Constants.Mechanisms.trapArmRotateLeftSpeed);
   }
 
   

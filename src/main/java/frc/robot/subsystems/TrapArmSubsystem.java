@@ -62,7 +62,7 @@ public class TrapArmSubsystem extends SubsystemBase {
   }
 
   public void rotate(double speed) {
-    if ((Math.abs(rotateMotor.getEncoder().getPosition())) < Constants.Mechanisms.flipLimit) {
+    if ((Math.abs(rotateMotor.getEncoder().getPosition())) < Constants.Mechanisms.rotateLimit) {
       rotateMotor.set(speed);
     } else {
       rotateMotor.set(0);

@@ -119,22 +119,33 @@ public class RobotContainer {
     m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 
-    
-    m_operator.b().whileTrue(new TrapGrabCmd (trapArmSubsystem));
+
+    m_operator.x().whileTrue(new TrapGrabCmd (trapArmSubsystem));
     m_operator.b().whileTrue(new TrapReleaseCmd (trapArmSubsystem));
     
-    boolean isTrapFlipActive = m_operator.getRightY() > triggerThreshold;
-    boolean isTrapRotateActive = m_operator.getLeftX() > triggerThreshold;
+    // boolean isTrapRotateLeftActive = m_operator.getLeftX() > -0.7;
+    // boolean isTrapRotateRightActive = m_operator.getLeftX() > 0.7;
 
-  if (isTrapFlipActive) {
-    // Execute TrapFlipCmd
-    new TrapFlipCmd(trapArmSubsystem, Constants.Mechanisms.flipSpeed).execute();
-  }
+    // boolean isTrapFlipLeftActive = m_operator.getRightX() > triggerThreshold;
+    // boolean isTrapFlipRightActive = m_operator.getRightX() > triggerThreshold;
 
-  if (isTrapRotateActive) {
-    // Execute TrapRotateCmd
-    new TrapRotateCmd(trapArmSubsystem, Constants.Mechanisms.rotateSpeed).execute();
-}
+    
+    m_operator.x().whileTrue(new TrapRotateLeftCmd(trapArmSubsystem));
+    m_operator.b().whileTrue(new TrapRotateRightCmd(trapArmSubsystem));
+
+    m_operator.x().whileTrue(new TrapFlipLeftCmd(trapArmSubsystem, Constants.Mechanisms.flipLimit));
+    m_operator.b().whileTrue(new TrapFlipRightCmd(trapArmSubsystem, Constants.Mechanisms.flipLimit));
+
+
+//   if (isTrapFlipActive) {
+//     // Execute TrapFlipCmd
+//     new TrapFlipCmd(trapArmSubsystem, Constants.Mechanisms.flipSpeed).execute();
+//   }
+
+//   if (isTrapRotateActive) {
+//     // Execute TrapRotateCmd
+//     new TrapRotateLeftCmd(trapArmSubsystem, Constants.Mechanisms.rotateSpeed).execute();
+// }
   }
 
   /**

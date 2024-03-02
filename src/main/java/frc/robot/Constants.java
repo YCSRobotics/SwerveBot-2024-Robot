@@ -157,6 +157,17 @@ public final class Constants {
     public static final double reversegrabberTargetSpeed = -0.6;
     public static final double reverseconveyorTargetSpeed = -1.0;
 
+    // Trap - Target Speeds
+    public static final double trapArmRotateLeftSpeed = -0.05;
+    public static final double trapArmRotateRightSpeed = 0.05;
+
+    public static final double trapArmFlipLeftSpeed = 0.0;//??
+    public static final double trapArmFlipRightSpeed = 0.0;//??
+
+
+    public static final double trapArmGrabSpeed = 0.0;//??
+    public static final double trapArmReleaseSpeed = 0.0;//??
+
 
     /*Hanger Target Position*/
     public static final double hangerTargetPosition = 50.0;
