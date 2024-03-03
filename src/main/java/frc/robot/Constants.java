@@ -198,14 +198,13 @@ public final class Constants {
     public static final double launcherPIDControllerkD = 0.0;
 
      /*TrapArm*/
-    public static final double trapArmPIDControllerkP = 0.0001; // Originally 0.05
-    public static final double trapArmPIDControllerkI = 0.0; // Originally 0.00002
-    public static final double trapArmPIDControllerkD = 0.0;
-    
     public static final double rotateSpeed = 0.0005;//??
-    public static final double rotateLimit = 2;//??
+    public static final double rotateMaxLimit = 25;//??
+    public static final double rotateMinLimit = 0;//??
+    
     public static final double flipSpeed = 0.0005;//??
-    public static final double flipLimit = 2;//??
+    public static final double flipMaxLimit = 25;//??
+    public static final double flipMinLimit = 0;//??
 
     public static final int solenoidPort = 50;//??
    

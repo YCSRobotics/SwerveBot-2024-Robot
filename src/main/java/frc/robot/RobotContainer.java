@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
@@ -61,11 +62,32 @@ public class RobotContainer {
             () -> m_driver.leftBumper().getAsBoolean()));
             // leftBumper Sets Driver Orientation Mode
 
+    configureDefaultCommands();
     // Configure the button bindings
     configureButtonBindings();
 
     // Configure autonomous commands
     configureAutonomousCommands();
+  }
+
+  private void configureDefaultCommands() {
+    // Set the default command for rotating the arm
+    trapArmSubsystem.setDefaultCommand(
+      new RunCommand(() -> {
+          double rotateJoystickValue = m_operator.getLeftX();
+          double rotateScalingFactor = 0.05;
+          trapArmSubsystem.rotate(rotateJoystickValue * rotateScalingFactor);
+      }, trapArmSubsystem)
+    );
+
+    // Set the default command for flipping the arm
+    trapArmSubsystem.setDefaultCommand(
+      new RunCommand(() -> {
+          double flipJoystickValue = m_operator.getRightX();
+          double flipScalingFactor = 0.05;
+          trapArmSubsystem.flip(flipJoystickValue * flipScalingFactor);
+      }, trapArmSubsystem)
+    );
   }
 
   private void configureAutonomousCommands() {
@@ -123,29 +145,6 @@ public class RobotContainer {
     m_operator.x().whileTrue(new TrapGrabCmd (trapArmSubsystem));
     m_operator.b().whileTrue(new TrapReleaseCmd (trapArmSubsystem));
     
-    // boolean isTrapRotateLeftActive = m_operator.getLeftX() > -0.7;
-    // boolean isTrapRotateRightActive = m_operator.getLeftX() > 0.7;
-
-    // boolean isTrapFlipLeftActive = m_operator.getRightX() > triggerThreshold;
-    // boolean isTrapFlipRightActive = m_operator.getRightX() > triggerThreshold;
-
-    
-    m_operator.x().whileTrue(new TrapRotateLeftCmd(trapArmSubsystem));
-    m_operator.b().whileTrue(new TrapRotateRightCmd(trapArmSubsystem));
-
-    m_operator.x().whileTrue(new TrapFlipLeftCmd(trapArmSubsystem, Constants.Mechanisms.flipLimit));
-    m_operator.b().whileTrue(new TrapFlipRightCmd(trapArmSubsystem, Constants.Mechanisms.flipLimit));
-
-
-//   if (isTrapFlipActive) {
-//     // Execute TrapFlipCmd
-//     new TrapFlipCmd(trapArmSubsystem, Constants.Mechanisms.flipSpeed).execute();
-//   }
-
-//   if (isTrapRotateActive) {
-//     // Execute TrapRotateCmd
-//     new TrapRotateLeftCmd(trapArmSubsystem, Constants.Mechanisms.rotateSpeed).execute();
-// }
   }
 
   /**

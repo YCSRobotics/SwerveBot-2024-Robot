@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.config.CTREConfigs;
 import frc.robot.commands.AutonomousLauncherCmd;
+import frc.robot.subsystems.TrapArmSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //RobotContainer.getTrapArmSubsystem().resetRotateEncoder;
   }
 
   /**
