@@ -59,7 +59,7 @@ public class RobotContainer {
             () -> -m_driver.getLeftY(),
             () -> -m_driver.getLeftX(),
             () -> -m_driver.getRightX(),
-            () -> m_driver.leftBumper().getAsBoolean()));
+            m_driver.leftBumper()));
             // leftBumper Sets Driver Orientation Mode
 
     configureDefaultCommands();
@@ -77,12 +77,6 @@ public class RobotContainer {
           double rotateJoystickValue = m_operator.getLeftX();
           double rotateScalingFactor = 0.05;
           trapArmSubsystem.rotate(rotateJoystickValue * rotateScalingFactor);
-      }, trapArmSubsystem)
-    );
-
-    // Set the default command for flipping the arm
-    trapArmSubsystem.setDefaultCommand(
-      new RunCommand(() -> {
           double flipJoystickValue = m_operator.getRightX();
           double flipScalingFactor = 0.05;
           trapArmSubsystem.flip(flipJoystickValue * flipScalingFactor);

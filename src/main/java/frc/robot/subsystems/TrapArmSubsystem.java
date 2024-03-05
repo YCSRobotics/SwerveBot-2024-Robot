@@ -25,7 +25,7 @@ public class TrapArmSubsystem extends SubsystemBase {
     flipMotor = new CANSparkMax(Constants.Mechanisms.flipMotorID, MotorType.kBrushless);
     rotateMotor = new CANSparkMax(Constants.Mechanisms.rotateMotorID, MotorType.kBrushless);
     
-    trapArmSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Mechanisms.solenoidPort);
+    trapArmSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Mechanisms.solenoidPort);
     
     rotateEncoder = rotateMotor.getEncoder();
     flipEncoder = flipMotor.getEncoder();
