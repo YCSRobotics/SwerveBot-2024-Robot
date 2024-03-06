@@ -5,7 +5,7 @@ import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -37,12 +37,11 @@ public class LauncherSubsystem extends SubsystemBase{
     public void setLauncherVelocityTarget(double targetVelocity) {
         m_leftlauncherPIDController.setReference(-targetVelocity, ControlType.kVelocity);
         m_rightLauncherPIDController.setReference(targetVelocity, ControlType.kVelocity);
-        System.out.println("Launcher System");
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("targetVelocity", m_leftLauncherMotor.getEncoder().getVelocity());
+        //SmartDashboard.putNumber("targetVelocity", m_leftLauncherMotor.getEncoder().getVelocity());
     }
 
     public void stopMotor() {

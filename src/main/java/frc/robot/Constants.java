@@ -43,7 +43,7 @@ public final class Constants {
 
     /* Swerve Current Limiting */
     public static final int angleContinuousCurrentLimit = 20;
-    public static final int driveContinuousCurrentLimit = 80;
+    public static final int driveContinuousCurrentLimit = 40;
 
     /* Angle Motor PID Values */
     public static final double angleKP = 0.01;
@@ -147,9 +147,9 @@ public final class Constants {
 
     /*Target Speeds*/
     // public static final double launcherTargetSpeed = 0.25; // Was 1.0
-    public static final double grabberTargetSpeed = 0.6;
+    public static final double grabberTargetSpeed = 0.25;  // reduced from 0.6
     public static final double conveyorTargetSpeed = 1.0;
-    public static final double ampVelocityTargetSpeed = 250;
+    public static final double ampVelocityTargetSpeed = 200; // reduced from 250
 
     public static final double launcherVelocityTarget = 5000.0; // 250 for Amp
 
@@ -194,7 +194,7 @@ public final class Constants {
 
     /*Launcher*/
     public static final double launcherPIDControllerkP = 0.0004;
-    public static final double launcherPIDControllerkI = 0.000001;
+    public static final double launcherPIDControllerkI = 0.000001; // Was 0.000001
     public static final double launcherPIDControllerkD = 0.0;
 
      /*TrapArm*/

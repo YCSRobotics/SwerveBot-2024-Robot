@@ -35,8 +35,11 @@ public class RobotContainer {
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
+<<<<<<< HEAD
   private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
   private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
+=======
+>>>>>>> main
 
   private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
   private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
@@ -117,10 +120,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /* Driver Buttons */
     // DON'T FOREGET!!!! The right leftbumper is used to set the Driver Orientation Mode above in Robot Container
-    m_driver.rightBumper().whileTrue(new GrabberConveyorReverseCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    m_driver.rightTrigger(triggerThreshold).whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    m_driver.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    m_driver.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
+    m_driver.rightBumper().whileTrue(new GrabberConveyorReverseCmd(grabberSubsystem, conveyorSubsystem));
+    m_driver.rightTrigger(triggerThreshold).whileTrue(new GrabberConveyorCmd(grabberSubsystem, conveyorSubsystem));
+    m_driver.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem));
+    m_driver.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem));
     m_driver.x().onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
     
     /* Operator Buttons */
@@ -132,6 +135,7 @@ public class RobotContainer {
         .whileTrue(new LowerCmd(leftHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch));
     m_operator.rightTrigger(triggerThreshold)
         .whileTrue(new LowerCmd(rightHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.rightLimitSwitch));
+<<<<<<< HEAD
     m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 
@@ -140,6 +144,10 @@ public class RobotContainer {
     // m_operator.b().whileTrue(new TrapReleaseCmd (trapArmSubsystem));
     m_operator.b().whileTrue(new TrapGrabCmd2 (trapArmSubsystem));
     m_operator.x().whileTrue(new TrapReleaseCmd2 (trapArmSubsystem));
+=======
+    m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem));
+    m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem));
+>>>>>>> main
   }
 
   /**

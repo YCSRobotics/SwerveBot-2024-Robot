@@ -4,20 +4,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.LauncherSubsystem;
-import frc.robot.subsystems.ProximitySensorSubsystem;
 
 public class ConveyorLauncherCmd extends Command {
   private final ConveyorSubsystem conveyorSubsystem;
   private final LauncherSubsystem launcherSubsystem;
-  private ProximitySensorSubsystem proximitySensorSubsystem;
 
   /** Creates a new ConveyorLauncherCmd. */
-  public ConveyorLauncherCmd(LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+  public ConveyorLauncherCmd(LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
     this.launcherSubsystem = launcherSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.proximitySensorSubsystem = proximitySensorSubsystem;
 
-    addRequirements(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+    addRequirements(launcherSubsystem, conveyorSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -49,6 +46,6 @@ public class ConveyorLauncherCmd extends Command {
   }
 
   public boolean isFieldElementInPosition() {
-    return proximitySensorSubsystem.isFieldElementInPosition();
+    return false;
   }
 }

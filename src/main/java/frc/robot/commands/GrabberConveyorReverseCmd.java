@@ -4,21 +4,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
-import frc.robot.subsystems.ProximitySensorSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GrabberConveyorReverseCmd extends Command {
   private final GrabberSubsystem grabberSubsystem;
   private final ConveyorSubsystem conveyorSubsystem;
-  private final ProximitySensorSubsystem proximitySensorSubsystem;
 
   /** Creates a new GrabberConveyorCmd. */
-  public GrabberConveyorReverseCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+  public GrabberConveyorReverseCmd(GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem) {
     this.grabberSubsystem = grabberSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.proximitySensorSubsystem = proximitySensorSubsystem;
       
-    addRequirements(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+    addRequirements(grabberSubsystem, conveyorSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -31,9 +28,9 @@ public class GrabberConveyorReverseCmd extends Command {
   public void execute() {
    //if (operator.getRawButton(1) && !proximitySensorSubsystem.isFieldElementInPosition()) { 
    //while (!proximitySensorSubsystem.isFieldElementInPosition()) { 
-      SmartDashboard.putNumber("Proximity Sensor Cmd", proximitySensorSubsystem.proximitySensor.getProximity());
-      SmartDashboard.putBoolean("ElementInPosition Cmd", proximitySensorSubsystem.isFieldElementInPosition());
-      SmartDashboard.putBoolean("isFinished", isFinished());
+      //SmartDashboard.putNumber("Proximity Sensor Cmd", proximitySensorSubsystem.proximitySensor.getProximity());
+      //SmartDashboard.putBoolean("ElementInPosition Cmd", proximitySensorSubsystem.isFieldElementInPosition());
+      //SmartDashboard.putBoolean("isFinished", isFinished());
       
       grabberSubsystem.setGrabberTargetSpeed(Constants.Mechanisms.reversegrabberTargetSpeed);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.reverseconveyorTargetSpeed);
@@ -59,6 +56,6 @@ public class GrabberConveyorReverseCmd extends Command {
     //   return false;
     // }
 
-    return proximitySensorSubsystem.isFieldElementInPosition();
+    return false;
   }
 }

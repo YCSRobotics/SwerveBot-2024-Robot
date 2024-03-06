@@ -119,17 +119,17 @@ public class Swerve extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // swerveOdometry.update(getGyroYaw(), getModulePositions());
-    // field.setRobotPose(getPose());
+    swerveOdometry.update(getGyroYaw(), getModulePositions());
+    field.setRobotPose(getPose());
 
-    // for (SwerveModule mod : mSwerveMods) {
-    //   SmartDashboard.putNumber(
-    //       "Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
-    //   SmartDashboard.putNumber(
-    //       "Mod " + mod.moduleNumber + " Integrated", mod.getState().angle.getDegrees());
-    //   SmartDashboard.putNumber(
-    //       "Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
-    // }
+    //for (SwerveModule mod : mSwerveMods) {
+       //SmartDashboard.putNumber(
+       //    "Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+       //SmartDashboard.putNumber(
+       //    "Mod " + mod.moduleNumber + " Integrated", mod.getState().angle.getDegrees());
+       //SmartDashboard.putNumber(
+       //    "Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
+    //}
 
     // SmartDashboard.putNumber("Gyro get degrees", swerveOdometry.getPoseMeters().getRotation().getDegrees());
   }
