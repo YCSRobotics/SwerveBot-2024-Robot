@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.io.Console;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -35,14 +33,10 @@ public class RobotContainer {
   private final LauncherSubsystem launcherSubsystem = new LauncherSubsystem();
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
-<<<<<<< HEAD
-  private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
-  private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
-=======
->>>>>>> main
 
   private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
   private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
+  private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
 
   /* Commands */
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
@@ -135,19 +129,10 @@ public class RobotContainer {
         .whileTrue(new LowerCmd(leftHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.leftLimitSwitch));
     m_operator.rightTrigger(triggerThreshold)
         .whileTrue(new LowerCmd(rightHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.rightLimitSwitch));
-<<<<<<< HEAD
-    m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-    m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
-
-
-    // m_operator.x().whileTrue(new TrapGrabCmd (trapArmSubsystem));
-    // m_operator.b().whileTrue(new TrapReleaseCmd (trapArmSubsystem));
-    m_operator.b().whileTrue(new TrapGrabCmd2 (trapArmSubsystem));
-    m_operator.x().whileTrue(new TrapReleaseCmd2 (trapArmSubsystem));
-=======
     m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem));
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem));
->>>>>>> main
+    m_operator.b().whileTrue(new TrapGrabCmd2 (trapArmSubsystem));
+    m_operator.x().whileTrue(new TrapReleaseCmd2 (trapArmSubsystem));
   }
 
   /**
