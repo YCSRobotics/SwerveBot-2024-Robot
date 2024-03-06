@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkPIDController;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkBase.ControlType;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -40,7 +40,7 @@ public class HangerSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //SmartDashboard.putNumber("Lift Current" + m_hangerMotor.getDeviceId(), m_hangerMotor.getOutputCurrent());
+        SmartDashboard.putNumber("Lift Current" + m_hangerMotor.getDeviceId(), m_hangerMotor.getOutputCurrent());
         // SmartDashboard.putNumber("Lift Velocity", m_encoder.getVelocity());
     }
 
