@@ -36,13 +36,15 @@ public class TrapArmSubsystem extends SubsystemBase {
     flipEncoder = flipMotor.getEncoder();
   }
 
+  
   public void grab(){
     trapArmSolenoid.set (true);
   }
   
   public void release(){
     trapArmSolenoid.set (false);
-    m_ph.enableCompressorAnalog(0,0);
+    //m_ph.enableCompressorAnalog(0,0);
+    m_ph.disableCompressor();
   }
   
   public void flip (double speed){

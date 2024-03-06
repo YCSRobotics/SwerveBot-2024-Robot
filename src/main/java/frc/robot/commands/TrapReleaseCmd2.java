@@ -36,6 +36,6 @@ public class TrapReleaseCmd2 extends InstantCommand {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
