@@ -204,7 +204,7 @@ public final class Constants {
     public static final double flipMaxLimit = 5;//??
     public static final double flipMinLimit = 0;//??
 
-    public static final int solenoidPort = 0;
+    public static final int solenoidPort = 15;
    
   }
 

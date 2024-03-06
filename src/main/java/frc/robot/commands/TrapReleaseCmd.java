@@ -6,7 +6,8 @@ import frc.robot.subsystems.TrapArmSubsystem;
 
 public class TrapReleaseCmd extends InstantCommand {
   public TrapReleaseCmd (TrapArmSubsystem trapArmSubsystem) {
-    super(trapArmSubsystem::release, trapArmSubsystem);
+    super(() -> trapArmSubsystem.release(), trapArmSubsystem);
+    // super(trapArmSubsystem::release, trapArmSubsystem);
   }
 
  

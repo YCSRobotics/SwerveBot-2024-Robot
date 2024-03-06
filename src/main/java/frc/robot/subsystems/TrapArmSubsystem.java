@@ -7,7 +7,7 @@ import com.revrobotics.CANSparkBase.ControlType;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
+import edu.wpi.first.wpilibj.PneumaticHub;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -20,12 +20,17 @@ public class TrapArmSubsystem extends SubsystemBase {
   private final RelativeEncoder rotateEncoder;
   private final RelativeEncoder flipEncoder;
 
+  private final PneumaticHub m_ph;
+
   
   public TrapArmSubsystem() {
     flipMotor = new CANSparkMax(Constants.Mechanisms.flipMotorID, MotorType.kBrushless);
     rotateMotor = new CANSparkMax(Constants.Mechanisms.rotateMotorID, MotorType.kBrushless);
     
     trapArmSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Mechanisms.solenoidPort);
+
+    m_ph = new PneumaticHub(1);
+    m_ph.enableCompressorAnalog(100,120);
     
     rotateEncoder = rotateMotor.getEncoder();
     flipEncoder = flipMotor.getEncoder();
@@ -37,6 +42,7 @@ public class TrapArmSubsystem extends SubsystemBase {
   
   public void release(){
     trapArmSolenoid.set (false);
+    m_ph.enableCompressorAnalog(0,0);
   }
   
   public void flip (double speed){
@@ -63,7 +69,5 @@ public class TrapArmSubsystem extends SubsystemBase {
 //A method to reset the encoder to zero
   public void resetRotateEncoder() {
     rotateEncoder.setPosition(0);
-}
-
-
+  }
 }

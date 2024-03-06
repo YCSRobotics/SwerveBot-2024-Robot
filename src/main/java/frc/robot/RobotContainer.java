@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -136,9 +137,10 @@ public class RobotContainer {
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem, proximitySensorSubsystem));
 
 
-    m_operator.x().whileTrue(new TrapGrabCmd (trapArmSubsystem));
-    m_operator.b().whileTrue(new TrapReleaseCmd (trapArmSubsystem));
-    
+    // m_operator.x().whileTrue(new TrapGrabCmd (trapArmSubsystem));
+    // m_operator.b().whileTrue(new TrapReleaseCmd (trapArmSubsystem));
+    m_operator.b().whileTrue(new TrapGrabCmd2 (trapArmSubsystem));
+    m_operator.x().whileTrue(new TrapReleaseCmd2 (trapArmSubsystem));
   }
 
   /**
