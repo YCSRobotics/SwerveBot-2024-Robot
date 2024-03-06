@@ -141,8 +141,8 @@ public final class Constants {
     public static final int leftHangerMotorID = 13;
     public static final int rightHangerMotorID = 14;
 
-    public static final int leftArmMotorID = 15;
-    public static final int rightArmMotorID = 16;
+    public static final int flipMotorID = 16;
+    public static final int rotateMotorID = 15; 
 
 
     /*Target Speeds*/
@@ -156,6 +156,17 @@ public final class Constants {
     // GrabberConveyor - Reverse Target Speeds
     public static final double reversegrabberTargetSpeed = -0.6;
     public static final double reverseconveyorTargetSpeed = -1.0;
+
+    // Trap - Target Speeds
+    public static final double trapArmRotateLeftSpeed = -0.05;
+    public static final double trapArmRotateRightSpeed = 0.05;
+
+    public static final double trapArmFlipLeftSpeed = 0.0;//??
+    public static final double trapArmFlipRightSpeed = 0.0;//??
+
+
+    public static final double trapArmGrabSpeed = 0.0;//??
+    public static final double trapArmReleaseSpeed = 0.0;//??
 
 
     /*Hanger Target Position*/
@@ -185,6 +196,16 @@ public final class Constants {
     public static final double launcherPIDControllerkP = 0.0004;
     public static final double launcherPIDControllerkI = 0.000001; // Was 0.000001
     public static final double launcherPIDControllerkD = 0.0;
+
+     /*TrapArm*/
+    public static final double rotateMaxLimit = 25;//??
+    public static final double rotateMinLimit = 0;//??
+    
+    public static final double flipMaxLimit = 25;//??
+    public static final double flipMinLimit = -25;//??
+
+    public static final int solenoidPort = 15;
+   
   }
 
   public static final class AutoConstants {

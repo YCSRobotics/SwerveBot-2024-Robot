@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.config.CTREConfigs;
-//import frc.robot.commands.AutonomousLauncherCmd;
-//import edu.wpi.first.wpilibj.Timer;
+import frc.robot.commands.AutonomousLauncherCmd;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //RobotContainer.getTrapArmSubsystem().resetRotateEncoder;
   }
 
   /**
@@ -76,7 +77,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    //CommandScheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
   }
 
   @Override
@@ -93,7 +94,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    //CommandScheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
   }
 
   @Override
