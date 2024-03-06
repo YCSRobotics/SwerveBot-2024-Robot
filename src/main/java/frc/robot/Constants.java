@@ -188,8 +188,8 @@ public final class Constants {
     public static DigitalInput leftLimitSwitch = new DigitalInput(0);
     public static DigitalInput rightLimitSwitch = new DigitalInput(1);
 
-    public static final double upVelocity = 3000;
-    public static final double downVelocity = -3000;
+    public static final double upVelocity = 5500;//3000
+    public static final double downVelocity = -5500;//-3000
 
 
     /*Launcher*/
