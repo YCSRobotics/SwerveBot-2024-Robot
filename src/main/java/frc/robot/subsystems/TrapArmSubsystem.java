@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.CANSparkBase.ControlType;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -38,11 +37,12 @@ public class TrapArmSubsystem extends SubsystemBase {
 
   
   public void grab(){
-    trapArmSolenoid.set (true);
+    trapArmSolenoid.set (false);
+    m_ph.enableCompressorAnalog(100,120);
   }
   
   public void release(){
-    trapArmSolenoid.set (false);
+    trapArmSolenoid.set (true);
     //m_ph.enableCompressorAnalog(0,0);
     m_ph.disableCompressor();
   }
@@ -52,9 +52,9 @@ public class TrapArmSubsystem extends SubsystemBase {
     // Check if moving within bounds
     if ((speed > 0 && currentPosition < Constants.Mechanisms.flipMaxLimit) || 
         (speed < 0 && currentPosition > Constants.Mechanisms.flipMinLimit)) {
-        rotateMotor.set(speed);
+        flipMotor.set(speed);
     } else {
-        rotateMotor.set(0);
+        flipMotor.set(0);
     }
   }
 

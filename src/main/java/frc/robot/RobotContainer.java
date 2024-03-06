@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -76,10 +75,10 @@ public class RobotContainer {
     trapArmSubsystem.setDefaultCommand(
       new RunCommand(() -> {
           double rotateJoystickValue = m_operator.getLeftX();
-          double rotateScalingFactor = 0.05;
+          double rotateScalingFactor = 0.15;
           trapArmSubsystem.rotate(rotateJoystickValue * rotateScalingFactor);
           double flipJoystickValue = m_operator.getRightX();
-          double flipScalingFactor = 0.05;
+          double flipScalingFactor = 0.15;
           trapArmSubsystem.flip(flipJoystickValue * flipScalingFactor);
       }, trapArmSubsystem)
     );
