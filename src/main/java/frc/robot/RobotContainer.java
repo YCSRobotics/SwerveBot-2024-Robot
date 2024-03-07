@@ -38,6 +38,8 @@ public class RobotContainer {
   private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
   private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
 
+  private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
+
   /* Commands */
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
@@ -65,6 +67,11 @@ public class RobotContainer {
 
     // Configure autonomous commands
     configureAutonomousCommands();
+
+  }
+
+  public CameraSubsystem getCameraSubsystem() {
+      return cameraSubsystem;
   }
 
   private void configureDefaultCommands() {
