@@ -29,18 +29,23 @@ public class ExampleAuto extends SequentialCommandGroup {
     // An example trajectory to follow.  All units in meters.
     Trajectory exampleTrajectory =
         TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
             
-            // List.of(new Translation2d(0.5, 0), new Translation2d(0.5, 0)),
-            // // End 3 meters straight ahead of where we started, facing forward
-            // new Pose2d(1, 0, new Rotation2d(Math.PI / 6)),
-            // config);
-
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+            // Start at the origin facing the +X direction
+            // S curve drive
+            //new Pose2d(0, 0, new Rotation2d(0)),
+            // Pass through these two interior waypoints, making an 's' curve path
+            //List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
+            //new Pose2d(3, 0, new Rotation2d(0)),
+            //config);
+
+            // Start at the origin facing the +X direction
+            // An example trajectory to go 1 meter forward and then turn 90 degrees
+            new Pose2d(0, 0, new Rotation2d(0)),
+            // No interior waypoints in this trajectory
+            List.of(),
+            // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
+            new Pose2d(1, 0, new Rotation2d(Math.PI / 2)),
             config);
 
     var thetaController =
@@ -63,10 +68,9 @@ public class ExampleAuto extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        //new InstantCommand(() -> s_Swerve.resetOdometry(exampleTrajectory.getInitialPose())),
+        //new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
-        swerveControllerCommand,
-        new AutonomousLauncherCmd(launcherSubsystem, 0.5, conveyorSubsystem, 1.0, 5)
+        swerveControllerCommand //,
         );
   }
 }
