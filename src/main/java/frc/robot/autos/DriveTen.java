@@ -18,8 +18,8 @@ import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
-public class ExampleAuto extends SequentialCommandGroup {
-  public ExampleAuto(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
+public class DriveTen extends SequentialCommandGroup {
+  public DriveTen(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -45,7 +45,7 @@ public class ExampleAuto extends SequentialCommandGroup {
             // No interior waypoints in this trajectory
             List.of(),
             // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
-            new Pose2d(1.22, 0, new Rotation2d(0)),
+            new Pose2d(3, 0, new Rotation2d(0)),
             config);
 
     var thetaController =
@@ -68,7 +68,7 @@ public class ExampleAuto extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
+        // new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
         swerveControllerCommand //,
         );

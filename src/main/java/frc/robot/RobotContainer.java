@@ -41,6 +41,9 @@ public class RobotContainer {
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   /* Commands */
+  private final DriveFour driveFour = new DriveFour(s_Swerve, launcherSubsystem, conveyorSubsystem);
+  private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
+  private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
   //private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherTargetSpeed);
@@ -82,15 +85,18 @@ public class RobotContainer {
           double rotateScalingFactor = 0.15;
           trapArmSubsystem.rotate(rotateJoystickValue * rotateScalingFactor);
           double flipJoystickValue = m_operator.getRightX();
-          double flipScalingFactor = 0.15;
+          double flipScalingFactor = 0.25;
           trapArmSubsystem.flip(flipJoystickValue * flipScalingFactor);
       }, trapArmSubsystem)
     );
   }
 
   private void configureAutonomousCommands() {
-    autoChooser.setDefaultOption("Swerve + Launcher Auto", exampleAuto);
-    autoChooser.addOption("Launcher Auto", autonomousLauncherCmd);
+    autoChooser.setDefaultOption("Swerve Drive 10 Feet", driveTen);
+    autoChooser.addOption("Swerve Drive 4 Feet", driveFour);
+    autoChooser.addOption("Swerve Drive 7 Feet", driveSeven);
+    autoChooser.addOption("Shoot + Drive 4 Feet", exampleAuto);
+    // autoChooser.addOption("Launcher Auto", autonomousLauncherCmd);
     SmartDashboard.putData("Autonomous Chooser", autoChooser);
 
     // Create a Shuffleboard layout for the auto buttons

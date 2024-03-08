@@ -18,8 +18,8 @@ import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
-public class ExampleAuto extends SequentialCommandGroup {
-  public ExampleAuto(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
+public class DriveFour extends SequentialCommandGroup {
+  public DriveFour(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -68,7 +68,7 @@ public class ExampleAuto extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
+        // new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
         swerveControllerCommand //,
         );

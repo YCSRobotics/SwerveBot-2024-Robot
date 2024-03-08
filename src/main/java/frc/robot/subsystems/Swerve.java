@@ -43,7 +43,7 @@ public class Swerve extends SubsystemBase {
 
     swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
 
-    //field = new Field2d();
+    field = new Field2d();
     //SmartDashboard.putData("Field", field);
   }
 
