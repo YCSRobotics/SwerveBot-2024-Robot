@@ -45,7 +45,7 @@ public class DriveTen extends SequentialCommandGroup {
             // No interior waypoints in this trajectory
             List.of(),
             // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
-            new Pose2d(3, 0, new Rotation2d(0)),
+            new Pose2d(3, 0.5, new Rotation2d(Math.PI / 2)),
             config);
 
     var thetaController =
@@ -70,7 +70,7 @@ public class DriveTen extends SequentialCommandGroup {
     addCommands(
         // new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
-        swerveControllerCommand //,
+        swerveControllerCommand
         );
   }
 }

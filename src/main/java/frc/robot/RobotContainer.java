@@ -36,7 +36,6 @@ public class RobotContainer {
 
   private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
   private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
-  private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
 
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
@@ -64,7 +63,6 @@ public class RobotContainer {
             m_driver.leftBumper()));
             // leftBumper Sets Driver Orientation Mode
 
-    configureDefaultCommands();
     // Configure the button bindings
     configureButtonBindings();
 
@@ -77,19 +75,6 @@ public class RobotContainer {
       return cameraSubsystem;
   }
 
-  private void configureDefaultCommands() {
-    // Set the default command for rotating the arm
-    trapArmSubsystem.setDefaultCommand(
-      new RunCommand(() -> {
-          double rotateJoystickValue = m_operator.getLeftX();
-          double rotateScalingFactor = 0.15;
-          trapArmSubsystem.rotate(rotateJoystickValue * rotateScalingFactor);
-          double flipJoystickValue = m_operator.getRightX();
-          double flipScalingFactor = 0.25;
-          trapArmSubsystem.flip(flipJoystickValue * flipScalingFactor);
-      }, trapArmSubsystem)
-    );
-  }
 
   private void configureAutonomousCommands() {
     autoChooser.setDefaultOption("Swerve Drive 10 Feet", driveTen);
@@ -144,8 +129,6 @@ public class RobotContainer {
         .whileTrue(new LowerCmd(rightHangerSubsystem, Constants.Mechanisms.downVelocity, Constants.Mechanisms.rightLimitSwitch));
     m_operator.y().whileTrue(new ConveyorLauncherCmd(launcherSubsystem, conveyorSubsystem));
     m_operator.a().whileTrue(new ConveyorAmpCmd(launcherSubsystem, conveyorSubsystem));
-    m_operator.b().whileTrue(new TrapGrabCmd2 (trapArmSubsystem));
-    m_operator.x().whileTrue(new TrapReleaseCmd2 (trapArmSubsystem));
   }
 
   /**
