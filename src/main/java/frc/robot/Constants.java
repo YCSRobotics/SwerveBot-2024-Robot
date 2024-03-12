@@ -148,7 +148,7 @@ public final class Constants {
     /*Target Speeds*/
     // public static final double launcherTargetSpeed = 0.25; // Was 1.0
     public static final double grabberTargetSpeed = 0.25;  // reduced from 0.6
-    public static final double conveyorTargetSpeed = 1.0;
+    public static final double conveyorTargetSpeed = 0.25;
     public static final double ampVelocityTargetSpeed = 200; // reduced from 250
 
     public static final double launcherVelocityTarget = 5000.0; // 250 for Amp

@@ -34,12 +34,15 @@ public class RobotContainer {
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
 
+  private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
+
   private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
   private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
 
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   /* Commands */
+  private final TwoNotesRedSpeaker twoNotesRedSpeaker = new TwoNotesRedSpeaker(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem);
   private final DriveFour driveFour = new DriveFour(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);
@@ -78,6 +81,7 @@ public class RobotContainer {
 
   private void configureAutonomousCommands() {
     autoChooser.setDefaultOption("Swerve Drive 10 Feet", driveTen);
+    autoChooser.addOption("Red - 2 Notes --> Speaker", twoNotesRedSpeaker);
     autoChooser.addOption("Swerve Drive 4 Feet", driveFour);
     autoChooser.addOption("Swerve Drive 7 Feet", driveSeven);
     autoChooser.addOption("Shoot + Drive 4 Feet", exampleAuto);
@@ -101,6 +105,10 @@ public class RobotContainer {
 
   public ConveyorSubsystem getConveyorSubsystem() {
     return conveyorSubsystem;
+  }
+
+  public GrabberSubsystem getGrabberSubsystem() {
+    return grabberSubsystem;
   }
 
   /**
