@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants;
 import frc.robot.commands.AutonomousGrabberConveyorCmd;
 import frc.robot.commands.AutonomousLauncherCmd;
@@ -67,7 +68,7 @@ public class TwoNotesRedSpeaker extends SequentialCommandGroup {
             // An example trajectory to go 1 meter forward and then turn 90 degrees
             new Pose2d(2, 0, new Rotation2d(0)),
             // No interior waypoints in this trajectory
-            List.of(),
+            List.of(new Translation2d(1, 0)),
             // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
             new Pose2d(0, 0, new Rotation2d(0)),
             config);
@@ -103,25 +104,35 @@ public class TwoNotesRedSpeaker extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 3),
-        new ParallelCommandGroup(
-            new InstantCommand(() -> s_Swerve.setPose(forwardTrajectory.getInitialPose())),
-            forwardSwerveControllerCommand,
-            // new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.25, conveyorSubsystem, 0.25, null, 3)
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.25, conveyorSubsystem, 0.25, 3)
-        ),
+        // new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
+        // new ParallelCommandGroup(
 
-        new ParallelCommandGroup(
-            new InstantCommand(() -> s_Swerve.setPose(reverseTrajectory.getInitialPose())),
-            reverseSwerveControllerCommand,
-            // new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.25, conveyorSubsystem, 0.25, null, 3)
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.25, conveyorSubsystem, 0.25, 3)
-        ),
+        //     new SequentialCommandGroup(
+        //         new InstantCommand(() -> s_Swerve.setPose(forwardTrajectory.getInitialPose())),
+        //         forwardSwerveControllerCommand,
+        //         new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
+        //     ),
 
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 3)
+        //     new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.40, conveyorSubsystem, 0.40, 5)
+        // ),
+
+        // new ParallelCommandGroup(
+            
+        //      new SequentialCommandGroup(
+        //         new InstantCommand(() -> s_Swerve.setPose(reverseTrajectory.getInitialPose())),
+        //         reverseSwerveControllerCommand,
+        //         new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
+        //     ),
+
+        //     new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.40, conveyorSubsystem, 0.40, 3)
+        // )
+
+        new InstantCommand(() -> s_Swerve.setPose(forwardTrajectory.getInitialPose())),
+        forwardSwerveControllerCommand,
         
-        // new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
-        // swerveControllerCommand //,
+        new InstantCommand(() -> s_Swerve.setPose(reverseTrajectory.getInitialPose())),
+        reverseSwerveControllerCommand
+
         );
   }
 }
