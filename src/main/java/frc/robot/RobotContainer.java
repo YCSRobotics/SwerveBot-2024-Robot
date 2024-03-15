@@ -42,7 +42,7 @@ public class RobotContainer {
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   /* Commands */
-  private final TwoNotesRedSpeaker twoNotesRedSpeaker = new TwoNotesRedSpeaker(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem);
+  private final TwoNotesRedSpeaker twoNotesRedSpeaker = new TwoNotesRedSpeaker(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   private final DriveFour driveFour = new DriveFour(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);

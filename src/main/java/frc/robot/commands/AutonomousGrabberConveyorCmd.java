@@ -12,22 +12,22 @@ public class AutonomousGrabberConveyorCmd extends Command {
   private final double grabberTargetSpeed;
   private final ConveyorSubsystem conveyorSubsystem;
   private final double conveyorTargetSpeed;
-  // private final ProximitySensorSubsystem proximitySensorSubsystem;
+  private final ProximitySensorSubsystem proximitySensorSubsystem;
   private final double durationSeconds;
   public static double startTime;
 
   /** Creates a new AutonomousCmd. */
   public AutonomousGrabberConveyorCmd(GrabberSubsystem grabberSubsystem, double grabberTargetSpeed, 
                                       ConveyorSubsystem conveyorSubsystem, double conveyorTargetSpeed, 
-                                      /*ProximitySensorSubsystem proximitySensorSubsystem, */double durationSeconds) {
+                                      ProximitySensorSubsystem proximitySensorSubsystem, double durationSeconds) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.grabberSubsystem = grabberSubsystem;
     this.grabberTargetSpeed = grabberTargetSpeed;
     this.conveyorSubsystem = conveyorSubsystem;
     this.conveyorTargetSpeed = conveyorTargetSpeed;
-    // this.proximitySensorSubsystem = proximitySensorSubsystem;
+    this.proximitySensorSubsystem = proximitySensorSubsystem;
     this.durationSeconds = durationSeconds;
-    addRequirements(grabberSubsystem, conveyorSubsystem/*, proximitySensorSubsystem*/);
+    addRequirements(grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -54,7 +54,7 @@ public class AutonomousGrabberConveyorCmd extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // return Timer.getFPGATimestamp() - startTime >= durationSeconds || proximitySensorSubsystem.isFieldElementInPosition();
-    return Timer.getFPGATimestamp() - startTime >= durationSeconds;
+    return Timer.getFPGATimestamp() - startTime >= durationSeconds || proximitySensorSubsystem.isFieldElementInPosition();
+    // return Timer.getFPGATimestamp() - startTime >= durationSeconds;
   }
 }

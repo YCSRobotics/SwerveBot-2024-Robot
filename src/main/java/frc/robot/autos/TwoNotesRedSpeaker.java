@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -17,61 +18,44 @@ import frc.robot.Constants;
 import frc.robot.commands.AutonomousGrabberConveyorCmd;
 import frc.robot.commands.AutonomousLauncherCmd;
 import frc.robot.subsystems.LauncherSubsystem;
+import frc.robot.subsystems.ProximitySensorSubsystem;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
 public class TwoNotesRedSpeaker extends SequentialCommandGroup {
-  public TwoNotesRedSpeaker(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem) {
+  public TwoNotesRedSpeaker(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
                 Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-            .setKinematics(Constants.Swerve.swerveKinematics);
+            .setKinematics(Constants.Swerve.swerveKinematics)
+            .setReversed(false);
+
+    TrajectoryConfig configReverse =
+        new TrajectoryConfig(
+                Constants.AutoConstants.kMaxSpeedMetersPerSecond,
+                Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+            .setKinematics(Constants.Swerve.swerveKinematics)
+            .setReversed(true);
 
     // An example trajectory to follow.  All units in meters.
     Trajectory forwardTrajectory =
         TrajectoryGenerator.generateTrajectory(
             
-            // Start at the origin facing the +X direction
-            // S curve drive
-            //new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            //List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            //new Pose2d(3, 0, new Rotation2d(0)),
-            //config);
-
-            // Start at the origin facing the +X direction
-            // An example trajectory to go 1 meter forward and then turn 90 degrees
             new Pose2d(0, 0, new Rotation2d(0)),
-            // No interior waypoints in this trajectory
             List.of(new Translation2d(1, 0)),
-            // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
             new Pose2d(2, 0, new Rotation2d(0)),
             config);
 
     Trajectory reverseTrajectory =
         TrajectoryGenerator.generateTrajectory(
             
-            // Start at the origin facing the +X direction
-            // S curve drive
-            //new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            //List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            //new Pose2d(3, 0, new Rotation2d(0)),
-            //config);
-
-            // Start at the origin facing the +X direction
-            // An example trajectory to go 1 meter forward and then turn 90 degrees
             new Pose2d(2, 0, new Rotation2d(0)),
-            // No interior waypoints in this trajectory
             List.of(new Translation2d(1, 0)),
-            // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
             new Pose2d(0, 0, new Rotation2d(0)),
-            config);
+            configReverse);
 
     var thetaController =
         new ProfiledPIDController(
@@ -104,34 +88,31 @@ public class TwoNotesRedSpeaker extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        // new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
-        // new ParallelCommandGroup(
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
+        new ParallelCommandGroup(
 
-        //     new SequentialCommandGroup(
-        //         new InstantCommand(() -> s_Swerve.setPose(forwardTrajectory.getInitialPose())),
-        //         forwardSwerveControllerCommand,
-        //         new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
-        //     ),
+            new SequentialCommandGroup(
+                new InstantCommand(() -> s_Swerve.setPose(forwardTrajectory.getInitialPose())),
+                forwardSwerveControllerCommand,
+                new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
+            ),
 
-        //     new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.40, conveyorSubsystem, 0.40, 5)
-        // ),
-
-        // new ParallelCommandGroup(
-            
-        //      new SequentialCommandGroup(
-        //         new InstantCommand(() -> s_Swerve.setPose(reverseTrajectory.getInitialPose())),
-        //         reverseSwerveControllerCommand,
-        //         new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
-        //     ),
-
-        //     new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.40, conveyorSubsystem, 0.40, 3)
-        // )
-
-        new InstantCommand(() -> s_Swerve.setPose(forwardTrajectory.getInitialPose())),
-        forwardSwerveControllerCommand,
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 3)
         
-        new InstantCommand(() -> s_Swerve.setPose(reverseTrajectory.getInitialPose())),
-        reverseSwerveControllerCommand
+        ),
+
+        new ParallelCommandGroup(
+            
+             new SequentialCommandGroup(
+                new InstantCommand(() -> s_Swerve.setPose(reverseTrajectory.getInitialPose())),
+                reverseSwerveControllerCommand,
+                new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
+            ),
+
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 2)
+        ),
+
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2)
 
         );
   }
