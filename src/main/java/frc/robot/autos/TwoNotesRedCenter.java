@@ -24,8 +24,10 @@ import frc.robot.subsystems.GrabberSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
-public class TwoNotesRedSpeaker extends SequentialCommandGroup {
-  public TwoNotesRedSpeaker(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+public class TwoNotesRedCenter extends SequentialCommandGroup {
+  public TwoNotesRedCenter(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+    
+    /*Trajectory Configurations*/
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -40,23 +42,24 @@ public class TwoNotesRedSpeaker extends SequentialCommandGroup {
             .setKinematics(Constants.Swerve.swerveKinematics)
             .setReversed(true);
 
-    // An example trajectory to follow.  All units in meters.
+    /*Trajectories, All units in meters*/
     Trajectory forwardTrajectory =
         TrajectoryGenerator.generateTrajectory(
             
             new Pose2d(0, 0, new Rotation2d(0)),
             List.of(new Translation2d(1, 0)),
-            new Pose2d(2, 0, new Rotation2d(0)),
+            new Pose2d(1.2, 0, new Rotation2d(0)), // x was 2
             config);
 
     Trajectory reverseTrajectory =
         TrajectoryGenerator.generateTrajectory(
             
-            new Pose2d(2, 0, new Rotation2d(0)),
+            new Pose2d(1.2, 0, new Rotation2d(0)), // x was 2
             List.of(new Translation2d(1, 0)),
             new Pose2d(0, 0, new Rotation2d(0)),
             configReverse);
 
+    /*Theta Controller*/
     var thetaController =
         new ProfiledPIDController(
             Constants.AutoConstants.kPThetaController,
@@ -65,6 +68,7 @@ public class TwoNotesRedSpeaker extends SequentialCommandGroup {
             Constants.AutoConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
+    /*Swerve Controller Commands*/
     SwerveControllerCommand forwardSwerveControllerCommand =
         new SwerveControllerCommand(
             forwardTrajectory,
@@ -89,6 +93,7 @@ public class TwoNotesRedSpeaker extends SequentialCommandGroup {
 
     addCommands(
         new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
+        
         new ParallelCommandGroup(
 
             new SequentialCommandGroup(
