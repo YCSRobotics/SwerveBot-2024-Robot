@@ -34,6 +34,8 @@ public class RobotContainer {
   private final ConveyorSubsystem conveyorSubsystem = new ConveyorSubsystem();
   private final GrabberSubsystem grabberSubsystem = new GrabberSubsystem();
 
+  private final ProximitySensorSubsystem proximitySensorSubsystem = new ProximitySensorSubsystem();
+
   private final HangerSubsystem leftHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.leftHangerMotorID);
   private final HangerSubsystem rightHangerSubsystem = new HangerSubsystem(Constants.Mechanisms.rightHangerMotorID);
   private final TrapArmSubsystem trapArmSubsystem = new TrapArmSubsystem();
@@ -41,6 +43,11 @@ public class RobotContainer {
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   /* Commands */
+  private final TwoNotesRedCenter twoNotesRedCenter = new TwoNotesRedCenter(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final ThreeNotesBluePole threeNotesBluePole = new ThreeNotesBluePole(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final DriveFour driveFour = new DriveFour(s_Swerve, launcherSubsystem, conveyorSubsystem);
+  private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
+  private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
   //private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherTargetSpeed);
@@ -89,8 +96,13 @@ public class RobotContainer {
   }
 
   private void configureAutonomousCommands() {
-    autoChooser.setDefaultOption("Swerve + Launcher Auto", exampleAuto);
-    autoChooser.addOption("Launcher Auto", autonomousLauncherCmd);
+    autoChooser.setDefaultOption("Swerve Drive 10 Feet", driveTen);
+    autoChooser.addOption("Red - Center Note", twoNotesRedCenter);
+    autoChooser.addOption("Blue - Center & Pole Note", threeNotesBluePole);
+    autoChooser.addOption("Swerve Drive 4 Feet", driveFour);
+    autoChooser.addOption("Swerve Drive 7 Feet", driveSeven);
+    autoChooser.addOption("Shoot + Drive 4 Feet", exampleAuto);
+    // autoChooser.addOption("Launcher Auto", autonomousLauncherCmd);
     SmartDashboard.putData("Autonomous Chooser", autoChooser);
 
     // Create a Shuffleboard layout for the auto buttons
@@ -110,6 +122,10 @@ public class RobotContainer {
 
   public ConveyorSubsystem getConveyorSubsystem() {
     return conveyorSubsystem;
+  }
+
+  public GrabberSubsystem getGrabberSubsystem() {
+    return grabberSubsystem;
   }
 
   /**

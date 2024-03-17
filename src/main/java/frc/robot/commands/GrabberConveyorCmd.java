@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.GrabberSubsystem;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GrabberConveyorCmd extends Command {
   private final GrabberSubsystem grabberSubsystem;
@@ -16,11 +16,21 @@ public class GrabberConveyorCmd extends Command {
     this.conveyorSubsystem = conveyorSubsystem;
       
     addRequirements(grabberSubsystem, conveyorSubsystem);
+
+    SmartDashboard.putNumber("Grabber Target Speed", Constants.Mechanisms.grabberTargetSpeed);
+    SmartDashboard.putNumber("Conveyor Target Speed", Constants.Mechanisms.conveyorTargetSpeed);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // Get target speeds from SmartDashboard
+    double initialGrabberSpeed = SmartDashboard.getNumber("Grabber Target Speed", Constants.Mechanisms.grabberTargetSpeed);
+    double initialConveyorSpeed = SmartDashboard.getNumber("Conveyor Target Speed", Constants.Mechanisms.conveyorTargetSpeed);
+
+    // Set initial target speeds
+    grabberSubsystem.setGrabberTargetSpeed(initialGrabberSpeed);
+    conveyorSubsystem.setConveyorTargetSpeed(initialConveyorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,8 +42,15 @@ public class GrabberConveyorCmd extends Command {
       //SmartDashboard.putBoolean("ElementInPosition Cmd", proximitySensorSubsystem.isFieldElementInPosition());
       //SmartDashboard.putBoolean("isFinished", isFinished());
       
-      grabberSubsystem.setGrabberTargetSpeed(Constants.Mechanisms.grabberTargetSpeed);
-      conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
+      // Read speeds from SmartDashboard
+      double updatedGrabberSpeed = SmartDashboard.getNumber("Grabber Target Speed", Constants.Mechanisms.grabberTargetSpeed);
+      double updatedConveyorSpeed = SmartDashboard.getNumber("Conveyor Target Speed", Constants.Mechanisms.conveyorTargetSpeed);
+
+      grabberSubsystem.setGrabberTargetSpeed(updatedGrabberSpeed);
+      conveyorSubsystem.setConveyorTargetSpeed(updatedConveyorSpeed);
+
+      // grabberSubsystem.setGrabberTargetSpeed(Constants.Mechanisms.grabberTargetSpeed);
+      // conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
    //}
 
      //} else {

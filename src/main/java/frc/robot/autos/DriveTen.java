@@ -12,14 +12,14 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
-import frc.robot.commands.AutonomousLauncherCmd;
+//import frc.robot.commands.AutonomousLauncherCmd;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
-public class ExampleAuto extends SequentialCommandGroup {
-  public ExampleAuto(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
+public class DriveTen extends SequentialCommandGroup {
+  public DriveTen(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, ConveyorSubsystem conveyorSubsystem) {
     TrajectoryConfig config =
         new TrajectoryConfig(
                 Constants.AutoConstants.kMaxSpeedMetersPerSecond,
@@ -29,7 +29,7 @@ public class ExampleAuto extends SequentialCommandGroup {
     // An example trajectory to follow.  All units in meters.
     Trajectory exampleTrajectory =
         TrajectoryGenerator.generateTrajectory(
-            
+
             // Start at the origin facing the +X direction
             // S curve drive
             //new Pose2d(0, 0, new Rotation2d(0)),
@@ -45,7 +45,7 @@ public class ExampleAuto extends SequentialCommandGroup {
             // No interior waypoints in this trajectory
             List.of(),
             // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
-            new Pose2d(1.22, 0, new Rotation2d(0)),
+            new Pose2d(3, 0.5, new Rotation2d(Math.PI / 2)),
             config);
 
     var thetaController =
@@ -68,9 +68,9 @@ public class ExampleAuto extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.4, 5),
+        // new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 1.0, 5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
-        swerveControllerCommand //,
+        swerveControllerCommand
         );
   }
 }
