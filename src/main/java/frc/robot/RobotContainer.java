@@ -44,7 +44,7 @@ public class RobotContainer {
 
   /* Commands */
   private final TwoNotesRedCenter twoNotesRedCenter = new TwoNotesRedCenter(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
-  private final ThreeNotesBluePole threeNotesBluePole = new ThreeNotesBluePole(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final ThreeNotesSpeakerSide threeNotesBluePole = new ThreeNotesSpeakerSide(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   private final DriveFour driveFour = new DriveFour(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);
