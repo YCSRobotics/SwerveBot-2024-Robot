@@ -29,7 +29,9 @@ public class TrapArmSubsystem extends SubsystemBase {
     trapArmSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.Mechanisms.solenoidPort);
 
     m_ph = new PneumaticHub(1);
-    m_ph.enableCompressorAnalog(100,120);
+    //m_ph.enableCompressorAnalog(100,120);
+    m_ph.disableCompressor();
+
     
     rotateEncoder = rotateMotor.getEncoder();
     flipEncoder = flipMotor.getEncoder();
@@ -38,14 +40,14 @@ public class TrapArmSubsystem extends SubsystemBase {
   
   public void grab(){
     trapArmSolenoid.set (false);
-    // m_ph.enableCompressorAnalog(100,120);
+    m_ph.disableCompressor();
   }
   
   public void release(){
     trapArmSolenoid.set (true);
-    //m_ph.enableCompressorAnalog(0,0);
-    // m_ph.disableCompressor();
+    m_ph.enableCompressorAnalog(80,100);
   }
+   
   
   public void flip (double speed){
     double currentPosition = flipEncoder.getPosition();
