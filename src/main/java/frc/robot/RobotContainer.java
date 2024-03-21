@@ -43,6 +43,7 @@ public class RobotContainer {
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   /* Commands */
+  private final Side_RedNoBluePole side_RedNoBluePole = new Side_RedNoBluePole(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   private final Side_RedPoleBlueNo side_RedPoleBlueNo = new Side_RedPoleBlueNo(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   private final Center_Middle center_Middle = new Center_Middle(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   private final Center_Middle_RedNoBluePole center_Middle_RedNoBluePole = new Center_Middle_RedNoBluePole(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
@@ -99,6 +100,7 @@ public class RobotContainer {
 
   private void configureAutonomousCommands() {
     autoChooser.setDefaultOption("Shoot Any + Drive 4 Feet", exampleAuto);
+    autoChooser.addOption("Side - Side Red No Pole/Side Blue With Pole", side_RedNoBluePole);
     autoChooser.addOption("Side - Side Red with Pole/Side Blue No Pole", side_RedPoleBlueNo);
     autoChooser.addOption("Center - Middle Only", center_Middle);
     autoChooser.addOption("Center - Middle - Side Red with Pole/Side Blue No Pole", center_Middle_RedPoleBlueNo);
