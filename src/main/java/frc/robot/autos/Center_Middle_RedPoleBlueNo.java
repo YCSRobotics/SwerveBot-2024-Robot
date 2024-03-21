@@ -24,8 +24,8 @@ import frc.robot.subsystems.GrabberSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
-public class ThreeNotesBluePole extends SequentialCommandGroup {
-  public ThreeNotesBluePole(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+public class Center_Middle_RedPoleBlueNo extends SequentialCommandGroup {
+  public Center_Middle_RedPoleBlueNo(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
 
     /*Trajectory Configurations*/
     TrajectoryConfig config =
@@ -63,15 +63,15 @@ public class ThreeNotesBluePole extends SequentialCommandGroup {
         TrajectoryGenerator.generateTrajectory(
 
             new Pose2d(0, 0, new Rotation2d(0)),
-            List.of(new Translation2d(0.6, 1.0)),
-            new Pose2d(1.3, 1.0, new Rotation2d(0)),
+            List.of(new Translation2d(0.6, 1.3)),
+            new Pose2d(1.3, 1.3, new Rotation2d(0)),
             config);
             // new Translation2d(1, 1.2)
 
     Trajectory reversePoleTrajectory =
         TrajectoryGenerator.generateTrajectory(
 
-            new Pose2d(1.3, 1.0, new Rotation2d(0)),
+            new Pose2d(1.3, 1.3, new Rotation2d(0)),
             List.of(),
             new Pose2d(0, 0, new Rotation2d(0)),
             configReverse);
@@ -132,7 +132,7 @@ public class ThreeNotesBluePole extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.60, 2),
 
         new ParallelCommandGroup(
             new SequentialCommandGroup(
@@ -140,7 +140,7 @@ public class ThreeNotesBluePole extends SequentialCommandGroup {
                 forwardCenterSwerveControllerCommand,
                 new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
             ),
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 3)
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 3)
         ),
 
         new ParallelCommandGroup(
@@ -149,10 +149,10 @@ public class ThreeNotesBluePole extends SequentialCommandGroup {
                 reverseCenterSwerveControllerCommand,
                 new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
             ),
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 2)
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 2)
         ),
 
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.60, 2),
 
         new ParallelCommandGroup(
             new SequentialCommandGroup(
@@ -160,7 +160,7 @@ public class ThreeNotesBluePole extends SequentialCommandGroup {
                 forwardPoleSwerveControllerCommand,
                 new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
             ),
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 3)
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 3)
         ),
 
         new ParallelCommandGroup(
@@ -169,10 +169,10 @@ public class ThreeNotesBluePole extends SequentialCommandGroup {
                 reversePoleSwerveControllerCommand,
                 new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
             ),
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 2)
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 2)
         ),
 
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2)        
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.60, 2)        
         );
   }
 }

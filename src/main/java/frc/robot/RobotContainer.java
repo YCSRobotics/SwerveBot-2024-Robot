@@ -43,8 +43,10 @@ public class RobotContainer {
   private final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 
   /* Commands */
-  private final TwoNotesRedCenter twoNotesRedCenter = new TwoNotesRedCenter(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
-  private final ThreeNotesBluePole threeNotesBluePole = new ThreeNotesBluePole(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final Side_RedPoleBlueNo side_RedPoleBlueNo = new Side_RedPoleBlueNo(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final Center_Middle center_Middle = new Center_Middle(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final Center_Middle_RedNoBluePole center_Middle_RedNoBluePole = new Center_Middle_RedNoBluePole(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
+  private final Center_Middle_RedPoleBlueNo center_Middle_RedPoleBlueNo = new Center_Middle_RedPoleBlueNo(s_Swerve, launcherSubsystem, grabberSubsystem, conveyorSubsystem, proximitySensorSubsystem);
   private final DriveFour driveFour = new DriveFour(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);
@@ -96,12 +98,15 @@ public class RobotContainer {
   }
 
   private void configureAutonomousCommands() {
-    autoChooser.setDefaultOption("Swerve Drive 10 Feet", driveTen);
-    autoChooser.addOption("Red - Center Note", twoNotesRedCenter);
-    autoChooser.addOption("Blue - Center & Pole Note", threeNotesBluePole);
+    autoChooser.setDefaultOption("Shoot Any + Drive 4 Feet", exampleAuto);
+    autoChooser.addOption("Side - Side Red with Pole/Side Blue No Pole", side_RedPoleBlueNo);
+    autoChooser.addOption("Center - Middle Only", center_Middle);
+    autoChooser.addOption("Center - Middle - Side Red with Pole/Side Blue No Pole", center_Middle_RedPoleBlueNo);
+    autoChooser.addOption("Center - Middle - Side Red No Pole/Side Blue with Pole", center_Middle_RedNoBluePole);
     autoChooser.addOption("Swerve Drive 4 Feet", driveFour);
     autoChooser.addOption("Swerve Drive 7 Feet", driveSeven);
-    autoChooser.addOption("Shoot + Drive 4 Feet", exampleAuto);
+    autoChooser.addOption("Swerve Drive 10 Feet", driveTen);
+    
     // autoChooser.addOption("Launcher Auto", autonomousLauncherCmd);
     SmartDashboard.putData("Autonomous Chooser", autoChooser);
 

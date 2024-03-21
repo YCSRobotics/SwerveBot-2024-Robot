@@ -147,15 +147,16 @@ public final class Constants {
 
     /*Target Speeds*/
     // public static final double launcherTargetSpeed = 0.25; // Was 1.0
-    public static final double grabberTargetSpeed = 0.40;  
-    public static final double conveyorTargetSpeed = 0.40;  
-    public static final double ampVelocityTargetSpeed = 200; // reduced from 250
+    public static final double grabberTargetSpeed = 0.60;  
+    public static final double conveyorTargetSpeed = 0.60;  
+    public static final double conveyorTargetSpeedLaunch = 0.80;  
+    public static final double ampVelocityTargetSpeed = 200; // increased from 375
 
     public static final double launcherVelocityTarget = 5000.0; // 250 for Amp
 
     // GrabberConveyor - Reverse Target Speeds
     public static final double reversegrabberTargetSpeed = -0.6;
-    public static final double reverseconveyorTargetSpeed = -1.0;
+    public static final double reverseconveyorTargetSpeed = -0.6;
 
     // Trap - Target Speeds
     public static final double trapArmRotateLeftSpeed = -0.05;
@@ -209,8 +210,8 @@ public final class Constants {
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 3; //2
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3;  //3
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
 

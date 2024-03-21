@@ -24,8 +24,8 @@ import frc.robot.subsystems.GrabberSubsystem;
 import frc.robot.subsystems.Swerve;
 import java.util.List;
 
-public class TwoNotesRedCenter extends SequentialCommandGroup {
-  public TwoNotesRedCenter(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
+public class Center_Middle extends SequentialCommandGroup {
+  public Center_Middle(Swerve s_Swerve, LauncherSubsystem launcherSubsystem, GrabberSubsystem grabberSubsystem, ConveyorSubsystem conveyorSubsystem, ProximitySensorSubsystem proximitySensorSubsystem) {
 
     /*Trajectory Configurations*/
     TrajectoryConfig config =
@@ -102,7 +102,7 @@ public class TwoNotesRedCenter extends SequentialCommandGroup {
                 new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
             ),
 
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 3)
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 3)
 
         ),
 
@@ -114,7 +114,7 @@ public class TwoNotesRedCenter extends SequentialCommandGroup {
                 new InstantCommand(() -> s_Swerve.drive(new Translation2d(0, 0), 0, false, false))
             ),
 
-            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.40, proximitySensorSubsystem, 2)
+            new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 2)
         ),
 
         new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2)

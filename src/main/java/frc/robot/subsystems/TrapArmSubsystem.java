@@ -38,13 +38,13 @@ public class TrapArmSubsystem extends SubsystemBase {
   
   public void grab(){
     trapArmSolenoid.set (false);
-    m_ph.enableCompressorAnalog(100,120);
+    // m_ph.enableCompressorAnalog(100,120);
   }
   
   public void release(){
     trapArmSolenoid.set (true);
     //m_ph.enableCompressorAnalog(0,0);
-    m_ph.disableCompressor();
+    // m_ph.disableCompressor();
   }
   
   public void flip (double speed){

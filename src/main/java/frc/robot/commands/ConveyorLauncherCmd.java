@@ -25,7 +25,7 @@ public class ConveyorLauncherCmd extends Command {
   @Override
   public void execute() {
       launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.launcherVelocityTarget);
-      conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeed);
+      conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeedLaunch);
 
     // } else {
     //   launcherSubsystem.setLauncherVelocityTarget(0);
