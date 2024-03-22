@@ -55,8 +55,8 @@ public class Side_RedPoleBlueNo extends SequentialCommandGroup {
 
     Trajectory reverseCenterTrajectory =
         TrajectoryGenerator.generateTrajectory(
-            forwardCenterTrajectory.getStates().get(forwardCenterTrajectory.getStates().size() - 1).poseMeters, // Start at the end of the forward trajectory
-            //new Pose2d(1.9, 0.1, new Rotation2d(Math.PI / 13)),  //7
+            //orwardCenterTrajectory.getStates().get(forwardCenterTrajectory.getStates().size() - 1).poseMeters, // Start at the end of the forward trajectory
+            new Pose2d(1.9, 0.1, new Rotation2d(Math.PI/ 7)),  //7
             List.of(),
             new Pose2d(0, 0, new Rotation2d(Math.PI / 3)),
             configReverse);

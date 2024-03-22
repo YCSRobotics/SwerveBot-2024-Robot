@@ -199,7 +199,7 @@ public final class Constants {
     public static final double launcherPIDControllerkD = 0.0;
 
      /*TrapArm*/
-    public static final double rotateMaxLimit = 40;//??
+    public static final double rotateMaxLimit = 55; //40
     public static final double rotateMinLimit = 0;//??
     
     public static final double flipMaxLimit = 25;//??
