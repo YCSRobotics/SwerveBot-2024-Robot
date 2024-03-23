@@ -90,7 +90,7 @@ public final class Constants {
       public static final int angleMotorID = 4;
       public static final int canCoderID = 0;
       //public static final Rotation2d angleOffset = Rotation2d.fromDegrees(173.145);
-      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(354.02);
+      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(335.57); // 354.02
       public static final SwerveModuleConstants constants =
           new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
@@ -100,7 +100,7 @@ public final class Constants {
       public static final int driveMotorID = 1;
       public static final int angleMotorID = 2;
       public static final int canCoderID = 1;
-      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(263.320);
+      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(264.11); // 263.320
       //public static final Rotation2d angleOffset = Rotation2d.fromDegrees(84.639);
       public static final SwerveModuleConstants constants =
           new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
@@ -112,7 +112,7 @@ public final class Constants {
       public static final int angleMotorID = 6;
       public static final int canCoderID = 2;
       //public static final Rotation2d angleOffset = Rotation2d.fromDegrees(5.098);
-      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(187.82);
+      public static final Rotation2d angleOffset = Rotation2d.fromDegrees(166.55); // 187.82
       public static final SwerveModuleConstants constants =
           new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
     }
@@ -211,6 +211,7 @@ public final class Constants {
 
   public static final class AutoConstants {
     public static final double kMaxSpeedMetersPerSecond = 3; //2
+    public static final double kMaxSpeedMetersPerSecond_Side = 2;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;  //3
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
