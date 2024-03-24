@@ -150,8 +150,8 @@ public final class Constants {
     public static final double grabberTargetSpeed = 0.60;  
     public static final double conveyorTargetSpeed = 0.60;  
     public static final double conveyorTargetSpeedLaunch = 0.80;  
-    public static final double leftLauncherAmpVelocityTargetSpeed = 500; // increased from 375
-    public static final double rightLauncherAmpVelocityTargetSpeed = 200;
+    public static final double leftLauncherAmpVelocityTargetSpeed = 200; // increased from 375
+    public static final double rightLauncherAmpVelocityTargetSpeed = 500;
 
     public static final double leftLauncherVelocityTarget = 5000.0; // 250 for Amp
     public static final double rightLauncherVelocityTarget = 5000.0;
