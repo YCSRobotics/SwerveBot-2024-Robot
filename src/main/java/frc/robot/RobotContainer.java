@@ -99,7 +99,7 @@ public class RobotContainer {
   }
 
   private void configureAutonomousCommands() {
-    autoChooser.setDefaultOption("Shoot Any + Drive 4 Feet", exampleAuto);
+    autoChooser.setDefaultOption("Shoot Any + Wait 5sec + Drive 4 Feet", exampleAuto);
     autoChooser.addOption("Side - Side Red No Pole/Side Blue With Pole", side_RedNoBluePole);
     autoChooser.addOption("Side - Side Red with Pole/Side Blue No Pole", side_RedPoleBlueNo);
     autoChooser.addOption("Center - Middle Only", center_Middle);

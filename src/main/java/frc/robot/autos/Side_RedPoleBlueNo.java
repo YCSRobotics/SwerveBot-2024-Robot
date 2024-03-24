@@ -30,14 +30,14 @@ public class Side_RedPoleBlueNo extends SequentialCommandGroup {
     /*Trajectory Configurations*/
     TrajectoryConfig config =
         new TrajectoryConfig(
-                Constants.AutoConstants.kMaxSpeedMetersPerSecond,
+                Constants.AutoConstants.kMaxSpeedMetersPerSecond_Side,
                 Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
             .setKinematics(Constants.Swerve.swerveKinematics)
             .setReversed(false);
 
     TrajectoryConfig configReverse =
         new TrajectoryConfig(
-                Constants.AutoConstants.kMaxSpeedMetersPerSecond,
+                Constants.AutoConstants.kMaxSpeedMetersPerSecond_Side,
                 Constants.AutoConstants.kMaxAccelerationMetersPerSecondSquared)
             .setKinematics(Constants.Swerve.swerveKinematics)
             .setReversed(true);
@@ -50,13 +50,13 @@ public class Side_RedPoleBlueNo extends SequentialCommandGroup {
             // No interior waypoints in this trajectory
             List.of(), // 0.4
             // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
-            new Pose2d(1.9, 0.1, new Rotation2d(Math.PI / 13)), // y: 0.4
+            new Pose2d(1.9, 0.1, new Rotation2d(Math.PI / 8)), // y: 0.4
             config);
 
     Trajectory reverseCenterTrajectory =
         TrajectoryGenerator.generateTrajectory(
             //orwardCenterTrajectory.getStates().get(forwardCenterTrajectory.getStates().size() - 1).poseMeters, // Start at the end of the forward trajectory
-            new Pose2d(1.9, 0.1, new Rotation2d(Math.PI/ 7)),  //7
+            new Pose2d(1.9, 0.1, new Rotation2d(Math.PI/ 8)),  //7
             List.of(),
             new Pose2d(0, 0, new Rotation2d(Math.PI / 3)),
             configReverse);

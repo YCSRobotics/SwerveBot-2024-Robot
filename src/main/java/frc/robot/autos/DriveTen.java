@@ -45,7 +45,7 @@ public class DriveTen extends SequentialCommandGroup {
             // No interior waypoints in this trajectory
             List.of(),
             // End 1 meter straight ahead of where we started, facing 90 degrees to the left (π/2 radians)
-            new Pose2d(3, 0.5, new Rotation2d(Math.PI / 2)),
+            new Pose2d(3, 0.5, new Rotation2d(0)),
             config);
 
     var thetaController =

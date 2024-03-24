@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants;
+import frc.robot.commands.AutonomousDelay;
 import frc.robot.commands.AutonomousLauncherCmd;
 import frc.robot.subsystems.LauncherSubsystem;
 import frc.robot.subsystems.ConveyorSubsystem;
@@ -68,7 +69,8 @@ public class ExampleAuto extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.4, 5),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.6, 2),
+        new AutonomousDelay(5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
         swerveControllerCommand //,
         );
