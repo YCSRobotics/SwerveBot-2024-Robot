@@ -92,7 +92,7 @@ public class Center_Middle extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, 5000, conveyorSubsystem, 0.25, 2),
 
         new ParallelCommandGroup(
 
@@ -117,7 +117,7 @@ public class Center_Middle extends SequentialCommandGroup {
             new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 2)
         ),
 
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.25, 2)
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, 5000, conveyorSubsystem, 0.25, 2)
 
         );
   }

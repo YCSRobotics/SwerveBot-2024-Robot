@@ -24,7 +24,8 @@ public class ConveyorLauncherCmd extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.launcherVelocityTarget);
+      launcherSubsystem.setLauncherVelocityTarget(Constants.Mechanisms.leftLauncherVelocityTarget, 
+                                                  Constants.Mechanisms.rightLauncherVelocityTarget);
       conveyorSubsystem.setConveyorTargetSpeed(Constants.Mechanisms.conveyorTargetSpeedLaunch);
 
     // } else {
@@ -35,7 +36,7 @@ public class ConveyorLauncherCmd extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherSubsystem.setLauncherVelocityTarget(0);
+    launcherSubsystem.setLauncherVelocityTarget(0, 0);
     conveyorSubsystem.setConveyorTargetSpeed(0);
   }
 

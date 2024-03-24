@@ -68,7 +68,7 @@ public class ExampleAuto extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.4, 5),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, 5000, conveyorSubsystem, 0.4, 5),
         new InstantCommand(() -> s_Swerve.setPose(exampleTrajectory.getInitialPose())),
         swerveControllerCommand //,
         );

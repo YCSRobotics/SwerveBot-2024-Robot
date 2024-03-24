@@ -8,18 +8,20 @@ import frc.robot.subsystems.ConveyorSubsystem;
 public class AutonomousLauncherCmd extends Command {
 
   private final LauncherSubsystem launcherSubsystem;
-  private final double launcherTargetSpeed;
+  private final double leftLauncherVelocityTarget;
+  private final double rightLaunchertargetVelocity;
   private final ConveyorSubsystem conveyorSubsystem;
   private final double conveyorTargetSpeed;
   private final double durationSeconds;
   public static double startTime;
 
   /** Creates a new AutonomousCmd. */
-  public AutonomousLauncherCmd(LauncherSubsystem launcherSubsystem, double launcherTargetSpeed, ConveyorSubsystem conveyorSubsystem, double conveyorTargetSpeed, double durationSeconds) {
+  public AutonomousLauncherCmd(LauncherSubsystem launcherSubsystem, double leftLaunchertargetVelocity, double rightLaunchertargetVelocity, ConveyorSubsystem conveyorSubsystem, double conveyorTargetSpeed, double durationSeconds) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.launcherSubsystem = launcherSubsystem;
     this.conveyorSubsystem = conveyorSubsystem;
-    this.launcherTargetSpeed = launcherTargetSpeed;
+    this.leftLauncherVelocityTarget = leftLaunchertargetVelocity;
+    this.rightLaunchertargetVelocity = rightLaunchertargetVelocity;
     this.conveyorTargetSpeed = conveyorTargetSpeed;
     this.durationSeconds = durationSeconds;
     addRequirements(launcherSubsystem, conveyorSubsystem);
@@ -28,7 +30,7 @@ public class AutonomousLauncherCmd extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    launcherSubsystem.setLauncherVelocityTarget(launcherTargetSpeed);
+    launcherSubsystem.setLauncherVelocityTarget(leftLauncherVelocityTarget, rightLaunchertargetVelocity);
     conveyorSubsystem.setConveyorTargetSpeed(conveyorTargetSpeed);
     startTime = Timer.getFPGATimestamp();
   }
@@ -42,7 +44,7 @@ public class AutonomousLauncherCmd extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    launcherSubsystem.setLauncherVelocityTarget(0.0);
+    launcherSubsystem.setLauncherVelocityTarget(0.0, 0.0);
     conveyorSubsystem.setConveyorTargetSpeed(0.0);
   }
 

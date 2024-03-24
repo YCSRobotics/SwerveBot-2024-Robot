@@ -132,7 +132,7 @@ public class Center_Middle_RedPoleBlueNo extends SequentialCommandGroup {
             s_Swerve);
 
     addCommands(
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.60, 2),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, 5000, conveyorSubsystem, 0.60, 2),
 
         new ParallelCommandGroup(
             new SequentialCommandGroup(
@@ -152,7 +152,7 @@ public class Center_Middle_RedPoleBlueNo extends SequentialCommandGroup {
             new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 2)
         ),
 
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.60, 2),
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, 5000, conveyorSubsystem, 0.60, 2),
 
         new ParallelCommandGroup(
             new SequentialCommandGroup(
@@ -172,7 +172,7 @@ public class Center_Middle_RedPoleBlueNo extends SequentialCommandGroup {
             new AutonomousGrabberConveyorCmd(grabberSubsystem, 0.60, conveyorSubsystem, 0.60, proximitySensorSubsystem, 2)
         ),
 
-        new AutonomousLauncherCmd(launcherSubsystem, 5000, conveyorSubsystem, 0.60, 2)        
+        new AutonomousLauncherCmd(launcherSubsystem, 5000, 5000, conveyorSubsystem, 0.60, 2)        
         );
   }
 }

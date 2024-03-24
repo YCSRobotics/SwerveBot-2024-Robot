@@ -6,14 +6,15 @@ import frc.robot.Constants;
 
 public class LauncherCmd extends Command {
   private final LauncherSubsystem launcherSubsystem;
-  private final double targetVelocity;
-  
+  private final double leftLaunchertargetVelocity;
+  private final double rightLaunchertargetVelocity;
 
   /** Creates a new SetlauncherSpeedCmd. */
-  public LauncherCmd(LauncherSubsystem launcherSubsystem, double targetVelocity) {
+  public LauncherCmd(LauncherSubsystem launcherSubsystem, double leftLaunchertargetVelocity, double rightLaunchertargetVelocity) {
     this.launcherSubsystem = launcherSubsystem;
-    this.targetVelocity = targetVelocity;
-    
+    this.leftLaunchertargetVelocity = leftLaunchertargetVelocity;
+    this.rightLaunchertargetVelocity = rightLaunchertargetVelocity;
+
     addRequirements(launcherSubsystem);
   }
 

@@ -52,12 +52,12 @@ public class RobotContainer {
   private final DriveTen driveTen = new DriveTen(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final DriveSeven driveSeven = new DriveSeven(s_Swerve, launcherSubsystem, conveyorSubsystem);
   private final ExampleAuto exampleAuto = new ExampleAuto(s_Swerve, launcherSubsystem, conveyorSubsystem);
-  private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
+  private final AutonomousLauncherCmd autonomousLauncherCmd = new AutonomousLauncherCmd(launcherSubsystem, 0.6, 0.6, conveyorSubsystem, 1.0, 5.0);
   //private final LauncherCmd launcherCmd = new LauncherCmd(launcherSubsystem, Constants.Mechanisms.launcherTargetSpeed);
 
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
    public AutonomousLauncherCmd getAutonomousLauncherCmd() {
-    return new AutonomousLauncherCmd (launcherSubsystem, 0.6, conveyorSubsystem, 1.0, 5.0);
+    return new AutonomousLauncherCmd (launcherSubsystem, 0.6, 0.6, conveyorSubsystem, 1.0, 5.0);
    } 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
